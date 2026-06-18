@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "title": "BNB Groupe | Leading Distribution Company in DRC",
+    "description": "BNB Groupe - The largest distribution company in the Democratic Republic of Congo. Discover our services, products and international presence.",
+    "keywords": "BNB Groupe, Biso Na Biso, distribution, DRC, Congo, Kinshasa, products, FMCG"
+  },
+  "nav": {
+    "about": "About Us",
+    "businessPortfolio": "Business Portfolio",
+    "products": "Products",
+    "focusBrand": "Focus Brand",
+    "distribution": "Distribution",
+    "eventsNews": "Events & News",
+    "csr": "CSR",
+    "career": "Career",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "title": "BNB Groupe",
+    "subtitle": "Leading Distribution Company in the Democratic Republic of Congo",
+    "description": "Since 1997, we have been connecting major international brands to millions of consumers in the DRC with excellence and innovation.",
+    "ctaPrimary": "Discover",
+    "ctaSecondary": "Contact Us"
+  },
+  "stats": {
+    "brands": "Associated Brands",
+    "products": "Quality Products",
+    "experience": "Years of Experience",
+    "coverage": "National Coverage"
+  },
+  "about": {
+    "title": "About BNB Groupe",
+    "subtitle": "Our Story",
+    "description": "Société Biso Na Biso Sarl is the largest and fastest-growing distribution company in the Democratic Republic of Congo. We address the daily needs of millions of consumers in food and non-food categories through a value proposition based on quality products at competitive prices.",
+    "founded": "Founded in 1997",
+    "foundedText": "In Kinshasa, capital of DRC",
+    "mission": "Our Mission",
+    "missionText": "To serve our communities to live a better life.",
+    "vision": "Our Vision",
+    "visionText": "To become the preferred distribution partner for major global brands in the DRC.",
+    "values": "Our Values",
+    "valuesText": "Ambitious • Hardworking • Resourceful"
+  },
+  "business": {
+    "title": "Business Portfolio",
+    "subtitle": "Our Expertise",
+    "fmcg": "FMCG",
+    "fmcgDesc": "Fast Moving Consumer Goods",
+    "fmcd": "FMCD",
+    "fmcdDesc": "Fast Moving Consumer Durables",
+    "pharma": "Pharmaceuticals",
+    "pharmaDesc": "Medicine distribution",
+    "realEstate": "Real Estate",
+    "realEstateDesc": "Property development",
+    "retail": "Retail",
+    "retailDesc": "Supermarkets and stores",
+    "manufacturing": "Manufacturing",
+    "manufacturingDesc": "Local production",
+    "entertainment": "Entertainment",
+    "entertainmentDesc": "Events and media"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Categories",
+    "foodBeverages": "Food & Beverages",
+    "healthHygiene": "Health & Hygiene",
+    "personalCare": "Personal Care",
+    "homeCare": "Home Care",
+    "babyCare": "Baby Care",
+    "electronics": "Electronics & Home Appliances",
+    "automobile": "Automobile",
+    "stationary": "Stationary",
+    "furniture": "Furniture & Fittings"
+  },
+  "focusBrand": {
+    "title": "Focus Brand",
+    "subtitle": "Our Own Brands",
+    "description": "BNB Groupe develops and markets its own brands with excellence. Our brand development expertise allows us to offer quality products tailored to the needs of Congolese consumers.",
+    "brands": {
+      "bomDia": "BomDia",
+      "bonAppetit": "Bon Appétit",
+      "bonDejeuner": "Bon Déjeuner",
+      "calcident": "Calcident",
+      "simba": "Simba",
+      "volcan": "Volcan"
+    }
+  },
+  "distribution": {
+    "title": "Distribution",
+    "subtitle": "Our Network",
+    "warehouses": "Warehouses",
+    "storage": "sqm storage",
+    "trucks": "Trucks",
+    "wholesale": "ELS Stores",
+    "sku": "SKU",
+    "stores": "KinMarché Stores",
+    "outlets": "Modern trade outlets",
+    "retailers": "Retailers covered"
+  },
+  "csr": {
+    "title": "Corporate Social Responsibility",
+    "subtitle": "Zarina Foundation",
+    "description": "BNB Groupe recognizes its social responsibility through the Zarina Foundation, working to improve the socio-economic conditions of populations in the DRC.",
+    "health": "Health & Nutrition",
+    "education": "Education",
+    "community": "Communities",
+    "environment": "Environment"
+  },
+  "career": {
+    "title": "Career",
+    "subtitle": "Join Us",
+    "description": "BNB Groupe is a great place to learn while you earn. We have a performance-driven and cohesive culture where we strive to work together to achieve more.",
+    "benefits": "Benefits",
+    "benefitsDesc": "Accommodation, medical facilities, food and transportation",
+    "development": "Development",
+    "developmentDesc": "Training programs and leadership",
+    "culture": "Culture",
+    "cultureDesc": "Collaborative work environment",
+    "positions": "Open Positions"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in Touch",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send",
+      "success": "Message sent successfully!",
+      "error": "An error occurred. Please try again."
+    }
+  },
+  "events": {
+    "title": "Events & News",
+    "subtitle": "Our Activities",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "readMore": "Read More"
+  },
+  "footer": {
+    "company": "Company",
+    "products": "Products",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved."
+  }
+}

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bnb-blue-50: #E6F0FF;
+  --color-bnb-blue-100: #CCE0FF;
+  --color-bnb-blue-200: #99C2FF;
+  --color-bnb-blue-300: #66A3FF;
+  --color-bnb-blue-400: #3385FF;
+  --color-bnb-blue-500: #0066FF;
+  --color-bnb-blue-600: #0052CC;
+  --color-bnb-blue-700: #003D99;
+  --color-bnb-blue-800: #002966;
+  --color-bnb-blue-900: #001433;
+  --color-bnb-blue-950: #0A1628;
+  
+  --color-bnb-orange-50: #FFF5EB;
+  --color-bnb-orange-100: #FFE6D1;
+  --color-bnb-orange-200: #FFCCA3;
+  --color-bnb-orange-300: #FFB375;
+  --color-bnb-orange-400: #FF9947;
+  --color-bnb-orange-500: #FF8019;
+  --color-bnb-orange-600: #E66600;
+  --color-bnb-orange-700: #B34F00;
+  --color-bnb-orange-800: #803800;
+  --color-bnb-orange-900: #4D2200;
+  
+  --color-bnb-gold-50: #FFFBEB;
+  --color-bnb-gold-100: #FEF3C7;
+  --color-bnb-gold-200: #FDE68A;
+  --color-bnb-gold-300: #FCD34D;
+  --color-bnb-gold-400: #FBBF24;
+  --color-bnb-gold-500: #F59E0B;
+  --color-bnb-gold-600: #D97706;
+  --color-bnb-gold-700: #B45309;
+  --color-bnb-gold-800: #92400E;
+  --color-bnb-gold-900: #78350F;
+  
+  --color-bnb-gray-50: #F9FAFB;
+  --color-bnb-gray-100: #F3F4F6;
+  --color-bnb-gray-200: #E5E7EB;
+  --color-bnb-gray-300: #D1D5DB;
+  --color-bnb-gray-400: #9CA3AF;
+  --color-bnb-gray-500: #6B7280;
+  --color-bnb-gray-600: #4B5563;
+  --color-bnb-gray-700: #374151;
+  --color-bnb-gray-800: #1F2937;
+  --color-bnb-gray-900: #111827;
+
+  --font-family-sans: var(--font-inter), system-ui, sans-serif;
+  --font-family-display: var(--font-poppins), var(--font-inter), system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-white text-bnb-gray-900;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-bnb-blue-600 to-bnb-blue-800;
+  }
+  
+  .bg-gradient-corporate {
+    @apply bg-gradient-to-br from-bnb-blue-900 via-bnb-blue-800 to-bnb-blue-950;
+  }
+  
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+}

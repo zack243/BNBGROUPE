@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "title": "BNB Groupe | Leader de la Distribution en RDC",
+    "description": "BNB Groupe - La plus grande entreprise de distribution en République Démocratique du Congo. Découvrez nos services, produits et notre présence internationale.",
+    "keywords": "BNB Groupe, Biso Na Biso, distribution, RDC, Congo, Kinshasa, produits, FMCG"
+  },
+  "nav": {
+    "about": "À Propos",
+    "businessPortfolio": "Portefeuille d'Activités",
+    "products": "Produits",
+    "focusBrand": "Focus Brand",
+    "distribution": "Distribution",
+    "eventsNews": "Événements & Actualités",
+    "csr": "RSE",
+    "career": "Carrière",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Fermer"
+  },
+  "hero": {
+    "title": "BNB Groupe",
+    "subtitle": "Leader de la Distribution en République Démocratique du Congo",
+    "description": "Depuis 1997, nous connectons les grandes marques internationales aux millions de consommateurs en RDC avec excellence et innovation.",
+    "ctaPrimary": "Découvrir",
+    "ctaSecondary": "Nous Contacter"
+  },
+  "stats": {
+    "brands": "Marques Associées",
+    "products": "Produits de Qualité",
+    "experience": "Années d'Expérience",
+    "coverage": "Couverture Nationale"
+  },
+  "about": {
+    "title": "À Propos de BNB Groupe",
+    "subtitle": "Notre Histoire",
+    "description": "Société Biso Na Biso Sarl est la plus grande et la plus dynamique entreprise de distribution en République Démocratique du Congo. Nous répondons aux besoins quotidiens de millions de consommateurs dans les catégories alimentaires et non alimentaires grâce à une proposition de valeur basée sur des produits de qualité à des prix compétitifs.",
+    "founded": "Fondée en 1997",
+    "foundedText": "À Kinshasa, capitale de la RDC",
+    "mission": "Notre Mission",
+    "missionText": "Servir nos communautés pour leur permettre de vivre une vie meilleure.",
+    "vision": "Notre Vision",
+    "visionText": "Devenir le partenaire de distribution privilégié des grandes marques mondiales en RDC.",
+    "values": "Nos Valeurs",
+    "valuesText": "Ambitieux • Travailleur • Ingénieux"
+  },
+  "business": {
+    "title": "Portefeuille d'Activités",
+    "subtitle": "Notre Expertise",
+    "fmcg": "FMCG",
+    "fmcgDesc": "Biens de consommation courante",
+    "fmcd": "FMCD",
+    "fmcdDesc": "Biens durables de consommation",
+    "pharma": "Pharmaceutiques",
+    "pharmaDesc": "Distribution de médicaments",
+    "realEstate": "Immobilier",
+    "realEstateDesc": "Développement immobilier",
+    "retail": "Commerce de Détail",
+    "retailDesc": "Supermarchés et magasins",
+    "manufacturing": "Fabrication",
+    "manufacturingDesc": "Production locale",
+    "entertainment": "Divertissement",
+    "entertainmentDesc": "Événements et médias"
+  },
+  "products": {
+    "title": "Nos Produits",
+    "subtitle": "Catégories",
+    "foodBeverages": "Aliments & Boissons",
+    "healthHygiene": "Santé & Hygiène",
+    "personalCare": "Soins Personnels",
+    "homeCare": "Soins de la Maison",
+    "babyCare": "Soins Bébé",
+    "electronics": "Électronique & Électroménager",
+    "automobile": "Automobile",
+    "stationary": "Papeterie",
+    "furniture": "Mobilier & Aménagement"
+  },
+  "focusBrand": {
+    "title": "Focus Brand",
+    "subtitle": "Nos Marques Propres",
+    "description": "BNB Groupe développe et commercialise ses propres marques avec excellence. Notre expertise en développement de marques nous permet de proposer des produits de qualité adaptés aux besoins des consommateurs congolais.",
+    "brands": {
+      "bomDia": "BomDia",
+      "bonAppetit": "Bon Appétit",
+      "bonDejeuner": "Bon Déjeuner",
+      "calcident": "Calcident",
+      "simba": "Simba",
+      "volcan": "Volcan"
+    }
+  },
+  "distribution": {
+    "title": "Distribution",
+    "subtitle": "Notre Réseau",
+    "warehouses": "Entrepôts",
+    "storage": "m² de stockage",
+    "trucks": "Camions",
+    "wholesale": "Magasins ELS",
+    "sku": "SKU",
+    "stores": "Magasins KinMarché",
+    "outlets": "Points de vente modernes",
+    "retailers": "Détaillants couverts"
+  },
+  "csr": {
+    "title": "Responsabilité Sociale",
+    "subtitle": "Fondation Zarina",
+    "description": "BNB Groupe reconnaît sa responsabilité sociale à travers la Fondation Zarina, en œuvrant pour l'amélioration des conditions socio-économiques des populations en RDC.",
+    "health": "Santé & Nutrition",
+    "education": "Éducation",
+    "community": "Communautés",
+    "environment": "Environnement"
+  },
+  "career": {
+    "title": "Carrière",
+    "subtitle": "Rejoignez-Nous",
+    "description": "BNB Groupe est un excellent endroit pour apprendre tout en gagnant. Nous avons une culture performante et cohésive où nous nous efforçons de travailler ensemble pour accomplir davantage.",
+    "benefits": "Avantages",
+    "benefitsDesc": "Hébergement, soins médicaux, repas et transport",
+    "development": "Développement",
+    "developmentDesc": "Programmes de formation et leadership",
+    "culture": "Culture",
+    "cultureDesc": "Environnement de travail collaboratif",
+    "positions": "Postes Ouverts"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Nous Contacter",
+    "address": "Adresse",
+    "phone": "Téléphone",
+    "email": "Email",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer",
+      "success": "Message envoyé avec succès !",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    }
+  },
+  "events": {
+    "title": "Événements & Actualités",
+    "subtitle": "Nos Activités",
+    "upcoming": "À Venir",
+    "past": "Passés",
+    "readMore": "Lire Plus"
+  },
+  "footer": {
+    "company": "Entreprise",
+    "products": "Produits",
+    "contact": "Contact",
+    "followUs": "Suivez-Nous",
+    "rights": "Tous droits réservés."
+  }
+}

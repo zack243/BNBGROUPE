@@ -15,37 +15,37 @@ export default function ProductsSection() {
     {
       name: t('foodBeverages'),
       href: `/${locale}/food-beverages/`,
-      image: '/images/products/food-beverages.jpg',
+      image: '/images/bnb/products/food-beverages.jpg',
       color: 'from-orange-500 to-red-500',
     },
     {
       name: t('healthHygiene'),
       href: `/${locale}/health-and-hygiene/`,
-      image: '/images/products/health-hygiene.jpg',
+      image: '/images/bnb/products/health-hygiene.jpg',
       color: 'from-green-500 to-teal-500',
     },
     {
       name: t('personalCare'),
       href: `/${locale}/personal-care-products/`,
-      image: '/images/products/personal-care.jpg',
+      image: '/images/bnb/products/personal-care.jpg',
       color: 'from-pink-500 to-rose-500',
     },
     {
       name: t('homeCare'),
       href: `/${locale}/home-care/`,
-      image: '/images/products/home-care.jpg',
+      image: '/images/bnb/products/home-care.jpg',
       color: 'from-blue-500 to-indigo-500',
     },
     {
       name: t('babyCare'),
       href: `/${locale}/baby-care/`,
-      image: '/images/products/baby-care.jpg',
+      image: '/images/bnb/products/baby-care.jpg',
       color: 'from-yellow-500 to-orange-500',
     },
     {
       name: t('electronics'),
       href: `/${locale}/electronics-home-appliances/`,
-      image: '/images/products/electronics.jpg',
+      image: '/images/bnb/products/electronics.jpg',
       color: 'from-purple-500 to-violet-500',
     },
   ];
@@ -72,17 +72,21 @@ export default function ProductsSection() {
                   whileHover={{ scale: 1.02 }}
                   className={cn(
                     'group relative h-64 rounded-2xl overflow-hidden',
-                    'bg-gradient-to-br shadow-lg'
+                    'shadow-lg'
                   )}
                 >
-                  {/* Gradient Background */}
+                  {/* Background Image */}
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  
+                  {/* Gradient Overlay */}
                   <div className={cn(
-                    'absolute inset-0 bg-gradient-to-br opacity-90',
+                    'absolute inset-0 bg-gradient-to-br opacity-80',
                     category.color
                   )} />
-                  
-                  {/* Pattern Overlay */}
-                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,white_1px,transparent_1px)] bg-[length:20px_20px]" />
 
                   {/* Content */}
                   <div className="relative h-full flex flex-col justify-end p-8">

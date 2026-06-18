@@ -65,12 +65,15 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href={`/${locale}/`} className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-bnb-blue-600 to-bnb-blue-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">BNB</span>
-              </div>
-              <span className="text-xl font-bold text-bnb-blue-900 hidden sm:block">
-                Groupe
-              </span>
+              <img
+                src="/images/bnb/logo/bnb-logo.png"
+                alt="BNB Groupe"
+                className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+              />
             </Link>
 
             {/* Desktop Navigation */}

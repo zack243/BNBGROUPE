@@ -64,15 +64,11 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href={`/${locale}/`} className="flex items-center gap-2">
+            <Link href={`/${locale}/`} className="flex items-center">
               <img
                 src="/images/bnb/logo/bnb-logo.png"
                 alt="BNB Groupe"
-                className="h-10 w-auto object-contain"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
+                className="h-12 w-auto object-contain"
               />
             </Link>
 

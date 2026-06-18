@@ -10,12 +10,12 @@ export default function FocusBrandContent() {
   const t = useTranslations('focusBrand');
 
   const ownBrands = [
-    { name: 'BomDia', category: 'Aliments', color: 'from-yellow-400 to-orange-500' },
-    { name: 'Bon Appétit', category: 'Condiments', color: 'from-red-400 to-red-600' },
-    { name: 'Bon Déjeuner', category: 'Aliments', color: 'from-green-400 to-green-600' },
-    { name: 'Calcident', category: 'Santé', color: 'from-blue-400 to-blue-600' },
-    { name: 'Simba', category: 'Boissons', color: 'from-orange-400 to-orange-600' },
-    { name: 'Volcan', category: 'Nettoyage', color: 'from-gray-400 to-gray-600' },
+    { name: 'BomDia', category: 'Aliments', color: 'from-yellow-400 to-orange-500', url: 'https://bom-dia-seven.vercel.app/fr/', logo: '/images/bnb/logo/bomdia-logo.png' },
+    { name: 'Bon Appétit', category: 'Condiments', color: 'from-red-400 to-red-600', url: 'https://bon-appetit-mauve.vercel.app/fr/', logo: '/images/bnb/logo/bonappetit-logo.png' },
+    { name: 'Bon Déjeuner', category: 'Aliments', color: 'from-green-400 to-green-600', url: 'https://bon-dejeuner.vercel.app/fr/', logo: '/images/bnb/logo/bondejeuner-logo.png' },
+    { name: 'Calcident', category: 'Santé', color: 'from-blue-400 to-blue-600', url: 'https://calcident.vercel.app/fr/', logo: '/images/bnb/logo/calcident-logo.png' },
+    { name: 'Simba', category: 'Boissons', color: 'from-orange-400 to-orange-600', url: 'https://simba-sandy.vercel.app/', logo: '/images/bnb/logo/simba-logo.png' },
+    { name: 'Volcan', category: 'Nettoyage', color: 'from-gray-400 to-gray-600', url: 'https://volcan1.vercel.app/', logo: '/images/bnb/logo/volcan-logo.png' },
   ];
 
   const expertise = [
@@ -89,32 +89,39 @@ export default function FocusBrandContent() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ownBrands.map((brand, index) => (
               <AnimatedSection key={brand.name} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -4 }}
-                  className={cn(
-                    'relative overflow-hidden rounded-2xl p-8',
-                    'bg-gradient-to-br shadow-lg'
-                  )}
-                  style={{
-                    background: `linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to))`,
-                  }}
-                >
-                  <div className={cn(
-                    'absolute inset-0 bg-gradient-to-br opacity-90',
-                    brand.color
-                  )} />
-                  <div className="relative z-10">
-                    <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
-                      {brand.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-white mb-2">
-                      {brand.name}
-                    </h3>
-                    <p className="text-white/80">
-                      Découvrir la gamme
-                    </p>
-                  </div>
-                </motion.div>
+                <a href={brand.url} target="_blank" rel="noopener noreferrer" className="block">
+                  <motion.div
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    className={cn(
+                      'relative overflow-hidden rounded-2xl p-8',
+                      'bg-gradient-to-br shadow-lg cursor-pointer'
+                    )}
+                  >
+                    <div className={cn(
+                      'absolute inset-0 bg-gradient-to-br opacity-90',
+                      brand.color
+                    )} />
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                      <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="h-16 w-auto object-contain mb-4 drop-shadow-lg"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                      <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-sm font-medium mb-2">
+                        {brand.category}
+                      </span>
+                      <h3 className="text-2xl font-bold text-white mb-1">
+                        {brand.name}
+                      </h3>
+                      <p className="text-white/80 text-sm">
+                        Visiter le site →
+                      </p>
+                    </div>
+                  </motion.div>
+                </a>
               </AnimatedSection>
             ))}
           </div>

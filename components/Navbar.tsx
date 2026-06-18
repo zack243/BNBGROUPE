@@ -77,7 +77,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
                 <div
                   key={item.label}
@@ -88,8 +88,9 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     className={cn(
-                      'flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors rounded-md',
-                      'text-bnb-gray-700 hover:text-bnb-blue-600 hover:bg-bnb-blue-50'
+                      'flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold tracking-wide transition-all duration-200 rounded-lg',
+                      'text-bnb-gray-700 hover:text-bnb-blue-700 hover:bg-bnb-blue-50/80',
+                      activeDropdown === item.label && 'text-bnb-blue-700 bg-bnb-blue-50'
                     )}
                   >
                     {item.label}
@@ -128,14 +129,14 @@ export default function Navbar() {
             </nav>
 
             {/* Right Section */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <LanguageSwitch className="hidden md:flex" />
-              
+
               <Link
                 href={`/${locale}/contact/`}
                 className={cn(
-                  'hidden md:inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg',
-                  'bg-bnb-blue-600 text-white hover:bg-bnb-blue-700 transition-colors'
+                  'hidden md:inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg',
+                  'bg-bnb-blue-600 text-white hover:bg-bnb-blue-700 transition-all duration-200 shadow-md hover:shadow-lg'
                 )}
               >
                 {t('contact')}

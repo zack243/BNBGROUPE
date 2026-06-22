@@ -73,3 +73,114 @@
     @apply bg-white/80 backdrop-blur-md;
   }
 }
+
+/* ── Hero card groups ── */
+.hero-card-group {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: flex-end;
+  transform-style: preserve-3d;
+  perspective: 1600px;
+  z-index: 5;
+}
+
+.hero-card-left {
+  left: 4%;
+  transform: translateY(-45%);
+}
+
+.hero-card-right {
+  right: 4%;
+  transform: translateY(-45%);
+}
+
+.hero-card {
+  position: relative;
+  width: 165px;
+  height: 490px;
+  margin-right: -28px;
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.85), rgba(180,190,202,.78) 38%, rgba(80,92,110,.82) 100%);
+  border: 1px solid rgba(0, 132, 255, .55);
+  box-shadow:
+    0 45px 90px rgba(0,0,0,.48),
+    0 0 28px rgba(0,132,255,.35),
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset -10px 0 22px rgba(0,50,110,.22);
+  overflow: visible;
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.42), transparent 35%),
+    linear-gradient(90deg, rgba(0,132,255,.25), transparent 12%, transparent 88%, rgba(0,132,255,.35));
+  pointer-events: none;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  bottom: -70px;
+  width: 84%;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(210,235,255,.42), rgba(0,80,160,.18) 45%, transparent 72%);
+  filter: blur(18px);
+  transform: rotateX(68deg) scaleX(1.25);
+  opacity: .75;
+  pointer-events: none;
+}
+
+.hero-card-left .card-back {
+  transform: translateX(26px) scale(.88) rotateY(38deg);
+  opacity: .82;
+  z-index: 1;
+}
+
+.hero-card-left .card-mid {
+  transform: translateX(10px) scale(.96) rotateY(26deg);
+  opacity: .94;
+  z-index: 2;
+}
+
+.hero-card-left .card-front {
+  transform: translateX(-6px) scale(1.05) rotateY(14deg);
+  z-index: 3;
+}
+
+.hero-card-right .card-front {
+  transform: translateX(6px) scale(1.05) rotateY(-14deg);
+  z-index: 3;
+}
+
+.hero-card-right .card-mid {
+  transform: translateX(-10px) scale(.96) rotateY(-26deg);
+  opacity: .94;
+  z-index: 2;
+}
+
+.hero-card-right .card-back {
+  transform: translateX(-26px) scale(.88) rotateY(-38deg);
+  opacity: .82;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .hero-card {
+    width: 110px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-card-group {
+    display: none;
+  }
+}

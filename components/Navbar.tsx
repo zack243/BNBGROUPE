@@ -67,95 +67,112 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm"
-        style={{ height: 72 }}
+        className="fixed top-0 left-0 right-0 z-50 bg-white"
+        style={{ height: 72, borderBottom: '1px solid #f0f0f0' }}
       >
-        <div className="max-w-[1380px] mx-auto px-8 h-full flex items-center justify-between">
+        {/*
+          True 3-column layout:
+          [Logo]  |  [Nav centered]  |  [Lang + Social]
+          Each outer column has the same min-width so the nav
+          is always optically centered regardless of logo width.
+        */}
+        <div
+          className="h-full flex items-center"
+          style={{ maxWidth: 1600, margin: '0 auto', padding: '0 40px' }}
+        >
+          {/* ── COL 1: Logo — fixed width, flush left ── */}
+          <div style={{ minWidth: 200, display: 'flex', alignItems: 'center' }}>
+            <Link href={`/${locale}/`} style={{ display: 'flex', alignItems: 'center' }}>
+              <img
+                src="/images/bnb/logo/logo bnb.avif"
+                alt="BNB Groupe"
+                style={{ height: 42, width: 'auto', objectFit: 'contain', display: 'block' }}
+              />
+            </Link>
+          </div>
 
-          {/* Logo */}
-          <Link href={`/${locale}/`} className="flex-shrink-0 flex items-center">
-            <img
-              src="/images/bnb/logo/logo bnb.avif"
-              alt="BNB Groupe"
-              style={{ height: 44, width: 'auto', objectFit: 'contain', display: 'block' }}
-            />
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center" style={{ gap: 4 }}>
+          {/* ── COL 2: Nav — flex-1 centered ── */}
+          <nav className="hidden xl:flex flex-1 items-center justify-center">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href.replace(/\/$/, ''));
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative px-5 py-2 text-sm font-medium transition-colors"
+                  className="relative"
                   style={{
+                    padding: '8px 16px',
+                    fontSize: 13.5,
+                    fontWeight: 500,
                     color: isActive ? '#e41e1e' : '#1a2340',
                     whiteSpace: 'nowrap',
+                    letterSpacing: '0.01em',
+                    transition: 'color 0.2s',
                   }}
                   onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e'; }}
                   onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#1a2340'; }}
                 >
                   {item.label}
                   {isActive && (
-                    <span
-                      style={{
-                        position: 'absolute',
-                        bottom: -4,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: 2,
-                        background: '#e41e1e',
-                        borderRadius: 2,
-                      }}
-                    />
+                    <span style={{
+                      position: 'absolute',
+                      bottom: 2,
+                      left: '16px',
+                      right: '16px',
+                      height: 2,
+                      background: '#e41e1e',
+                      borderRadius: 2,
+                    }} />
                   )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right: Language + Social */}
-          <div className="hidden xl:flex items-center gap-3">
+          {/* ── COL 3: Language + Social — fixed width, flush right ── */}
+          <div
+            className="hidden xl:flex items-center justify-end"
+            style={{ minWidth: 200, gap: 6 }}
+          >
             <LanguageSwitch />
-            <div style={{ width: 1, height: 20, background: '#e5e7eb', margin: '0 8px' }} />
-            <div className="flex items-center gap-1">
-              {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="flex items-center justify-center transition-colors"
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: '50%',
-                    border: '1px solid #e5e7eb',
-                    color: '#374151',
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e';
-                    (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e41e1e';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color = '#374151';
-                    (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e5e7eb';
-                  }}
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
+            <div style={{ width: 1, height: 18, background: '#d1d5db', margin: '0 6px' }} />
+            {socialLinks.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 30,
+                  height: 30,
+                  borderRadius: '50%',
+                  border: '1px solid #e5e7eb',
+                  color: '#6b7280',
+                  transition: 'all 0.2s',
+                  flexShrink: 0,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e';
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e41e1e';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = '#6b7280';
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e5e7eb';
+                }}
+              >
+                {s.icon}
+              </a>
+            ))}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="xl:hidden p-2 text-gray-700"
+            className="xl:hidden ml-auto p-2 text-gray-700"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

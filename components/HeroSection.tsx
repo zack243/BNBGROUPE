@@ -9,6 +9,51 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 const TOTAL_SLIDES = 6;
 const AUTOPLAY_INTERVAL = 4000;
 
+/* ── Standalone card component (outside render fn to avoid remounts) ── */
+function PanelCard({
+  width, height, rotate, left, right, bottom, opacity, zIndex, delay, initX, side,
+}: {
+  width: number; height: number; rotate: number;
+  left?: number | string; right?: number | string; bottom: number | string;
+  opacity: number; zIndex: number; delay: number; initX: number; side: 'left' | 'right';
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: initX }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      style={{
+        position: 'absolute',
+        width,
+        height,
+        bottom,
+        ...(left !== undefined ? { left } : {}),
+        ...(right !== undefined ? { right } : {}),
+        borderRadius: 20,
+        transform: `rotate(${rotate}deg)`,
+        zIndex,
+        opacity,
+        background: 'linear-gradient(175deg, #cdd6e4 0%, #a2b2c6 30%, #8294aa 60%, #657484 85%, #505e6e 100%)',
+        boxShadow: '0 32px 80px rgba(0,4,20,0.80), 0 8px 24px rgba(0,4,20,0.55), inset 0 1px 0 rgba(255,255,255,0.22)',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Top-left specular */}
+      <div style={{ position: 'absolute', inset: 0, borderRadius: 20, background: 'linear-gradient(145deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.06) 35%, transparent 60%)' }} />
+      {/* Edge catch-light — left for left-side cards, right for right-side */}
+      {side === 'left' ? (
+        <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '20%', background: 'linear-gradient(to right, rgba(255,255,255,0.20) 0%, transparent 100%)' }} />
+      ) : (
+        <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '20%', background: 'linear-gradient(to left, rgba(255,255,255,0.20) 0%, transparent 100%)' }} />
+      )}
+      {/* Bottom depth fade */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%', borderRadius: '0 0 20px 20px', background: 'linear-gradient(to top, rgba(4,12,40,0.65) 0%, transparent 100%)' }} />
+      {/* Outer rim */}
+      <div style={{ position: 'absolute', inset: 0, borderRadius: 20, border: '1px solid rgba(255,255,255,0.28)' }} />
+    </motion.div>
+  );
+}
+
 export default function HeroSection() {
   const locale = useLocale();
   const [activeSlide, setActiveSlide] = useState(0);
@@ -22,45 +67,12 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, [activeSlide, goTo]);
 
-  /* ── card helper ── */
-  const Card = ({ w, h, rotate, tx, ty, opacity, zIndex, delay, shadow, initX }: {
-    w: number; h: number; rotate: number; tx: number; ty: number;
-    opacity: number; zIndex: number; delay: number; shadow: string; initX: number;
-  }) => (
-    <motion.div
-      initial={{ opacity: 0, x: initX }}
-      animate={{ opacity, x: 0 }}
-      transition={{ delay, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        width: w,
-        height: h,
-        borderRadius: 18,
-        background: 'linear-gradient(175deg, #d0d8e8 0%, #a8b8cc 25%, #8898ae 55%, #6a7a90 80%, #586070 100%)',
-        boxShadow: shadow,
-        transform: `rotate(${rotate}deg) translate(${tx}px, ${ty}px)`,
-        zIndex,
-        overflow: 'hidden',
-      }}
-    >
-      {/* Top specular highlight */}
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(170deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 40%, transparent 70%)', borderRadius: 18 }} />
-      {/* Left edge glow */}
-      <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '22%', background: 'linear-gradient(to right, rgba(255,255,255,0.18) 0%, transparent 100%)' }} />
-      {/* Bottom fade */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(0,10,40,0.55) 0%, transparent 100%)', borderRadius: '0 0 18px 18px' }} />
-      {/* Outer border */}
-      <div style={{ position: 'absolute', inset: 0, borderRadius: 18, border: '1px solid rgba(255,255,255,0.35)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)' }} />
-    </motion.div>
-  );
-
   return (
     <div className="w-full">
       {/* ── HERO ── */}
       <section
         className="relative w-full overflow-hidden"
-        style={{ height: '78vh', minHeight: 520 }}
+        style={{ height: '80vh', minHeight: 560 }}
       >
         {/* ── BACKGROUND IMAGE ── */}
         <div
@@ -73,121 +85,63 @@ export default function HeroSection() {
           }}
         />
 
-        {/* Thin dark overlay to deepen contrast and help text legibility */}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'rgba(2,8,28,0.38)' }}
+        {/* Dark scrim — preserves light beams, improves text legibility */}
+        <div className="absolute inset-0" style={{ background: 'rgba(2,8,28,0.32)' }} />
+
+        {/* ═══════════════════════════════════════════════
+            LEFT CARD GROUP
+            3 cards overlapping, fanning toward center.
+            Positioned using absolute coords so they truly
+            overlap and sit anchored at the bottom.
+        ════════════════════════════════════════════════ */}
+
+        {/* Card A — outermost / furthest back */}
+        <PanelCard
+          width={140} height={310}
+          rotate={-18}
+          left={20} bottom={60}
+          opacity={0.45} zIndex={2} delay={0.1} initX={-120} side="left"
+        />
+        {/* Card B — middle */}
+        <PanelCard
+          width={162} height={355}
+          rotate={-9}
+          left={80} bottom={60}
+          opacity={0.70} zIndex={3} delay={0.22} initX={-90} side="left"
+        />
+        {/* Card C — front / closest to camera */}
+        <PanelCard
+          width={184} height={400}
+          rotate={-2}
+          left={162} bottom={60}
+          opacity={0.95} zIndex={4} delay={0.36} initX={-60} side="left"
         />
 
-        {/* Centre spotlight — lifts the glow behind text */}
-        <div
-          className="absolute"
-          style={{
-            top: '10%', left: '50%',
-            transform: 'translateX(-50%)',
-            width: '44%', height: '65%',
-            background: 'radial-gradient(ellipse 55% 70% at 50% 20%, rgba(40,100,255,0.18) 0%, transparent 70%)',
-            filter: 'blur(6px)',
-            pointerEvents: 'none',
-          }}
+        {/* ═══════════════════════════════════════════════
+            RIGHT CARD GROUP — mirror of left
+        ════════════════════════════════════════════════ */}
+
+        {/* Card C — front / closest */}
+        <PanelCard
+          width={184} height={400}
+          rotate={2}
+          right={162} bottom={60}
+          opacity={0.95} zIndex={4} delay={0.36} initX={60} side="right"
         />
-
-        {/* ── LEFT CARDS ── */}
-        {/* Container anchored bottom-left so cards sit on the floor */}
-        <div
-          className="absolute"
-          style={{
-            left: 0,
-            bottom: '8%',
-            width: '30vw',
-            minWidth: 220,
-            maxWidth: 380,
-            height: '72%',
-          }}
-        >
-          {/* Card 1 — outermost, smallest, heavily rotated */}
-          <Card
-            w={130} h={290}
-            rotate={-22} tx={-18} ty={0}
-            opacity={0.42} zIndex={1} delay={0.15} initX={-100}
-            shadow="0 30px 70px rgba(0,0,20,0.85), 0 6px 20px rgba(0,0,20,0.6)"
-          />
-          {/* Card 2 — middle */}
-          <Card
-            w={155} h={330}
-            rotate={-12} tx={50} ty={-10}
-            opacity={0.68} zIndex={2} delay={0.28} initX={-80}
-            shadow="0 35px 80px rgba(0,0,20,0.8), 0 8px 24px rgba(0,0,20,0.55)"
-          />
-          {/* Card 3 — front, largest, slight inward lean */}
-          <Card
-            w={178} h={370}
-            rotate={-3} tx={130} ty={-24}
-            opacity={0.92} zIndex={3} delay={0.42} initX={-60}
-            shadow="0 40px 90px rgba(0,0,20,0.75), 0 10px 30px rgba(0,0,20,0.5), 0 0 60px rgba(20,60,180,0.25)"
-          />
-
-          {/* Floor reflection — left group */}
-          <div style={{
-            position: 'absolute',
-            bottom: -32,
-            left: 0,
-            right: 0,
-            height: 32,
-            background: 'linear-gradient(to bottom, rgba(180,200,230,0.12) 0%, transparent 100%)',
-            filter: 'blur(4px)',
-            transform: 'scaleY(-1)',
-            pointerEvents: 'none',
-          }} />
-        </div>
-
-        {/* ── RIGHT CARDS — mirror ── */}
-        <div
-          className="absolute"
-          style={{
-            right: 0,
-            bottom: '8%',
-            width: '30vw',
-            minWidth: 220,
-            maxWidth: 380,
-            height: '72%',
-          }}
-        >
-          {/* Card 3 — front, largest */}
-          <Card
-            w={178} h={370}
-            rotate={3} tx={-130} ty={-24}
-            opacity={0.92} zIndex={3} delay={0.42} initX={60}
-            shadow="0 40px 90px rgba(0,0,20,0.75), 0 10px 30px rgba(0,0,20,0.5), 0 0 60px rgba(20,60,180,0.25)"
-          />
-          {/* Card 2 — middle */}
-          <Card
-            w={155} h={330}
-            rotate={12} tx={-50} ty={-10}
-            opacity={0.68} zIndex={2} delay={0.28} initX={80}
-            shadow="0 35px 80px rgba(0,0,20,0.8), 0 8px 24px rgba(0,0,20,0.55)"
-          />
-          {/* Card 1 — outermost */}
-          <Card
-            w={130} h={290}
-            rotate={22} tx={18} ty={0}
-            opacity={0.42} zIndex={1} delay={0.15} initX={100}
-            shadow="0 30px 70px rgba(0,0,20,0.85), 0 6px 20px rgba(0,0,20,0.6)"
-          />
-
-          {/* Floor reflection — right group */}
-          <div style={{
-            position: 'absolute',
-            bottom: -32,
-            left: 0,
-            right: 0,
-            height: 32,
-            background: 'linear-gradient(to bottom, rgba(180,200,230,0.12) 0%, transparent 100%)',
-            filter: 'blur(4px)',
-            transform: 'scaleY(-1)',
-            pointerEvents: 'none',
-          }} />
-        </div>
+        {/* Card B — middle */}
+        <PanelCard
+          width={162} height={355}
+          rotate={9}
+          right={80} bottom={60}
+          opacity={0.70} zIndex={3} delay={0.22} initX={90} side="right"
+        />
+        {/* Card A — outermost / furthest back */}
+        <PanelCard
+          width={140} height={310}
+          rotate={18}
+          right={20} bottom={60}
+          opacity={0.45} zIndex={2} delay={0.1} initX={120} side="right"
+        />
 
         {/* ── CENTER CONTENT ── */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">

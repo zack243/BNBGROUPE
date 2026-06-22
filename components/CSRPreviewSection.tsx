@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useLocale } from '@/lib/i18n-context';
+import { useLocale, useTranslations } from '@/lib/i18n-context';
 import Link from 'next/link';
 import { ArrowRight, Quote } from 'lucide-react';
 
@@ -28,6 +28,7 @@ const TESTIMONIALS = [
 
 export default function CSRPreviewSection() {
   const locale = useLocale();
+  const t = useTranslations('csrHome');
 
   return (
     <>
@@ -71,20 +72,18 @@ export default function CSRPreviewSection() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
                 <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
                 <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
-                  Notre Engagement
+                  {t('label')}
                 </span>
               </div>
 
               {/* Title */}
               <h2 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: 24 }}>
-                <span style={{ color: '#1a2340', display: 'block' }}>Responsabilité</span>
-                <span style={{ color: '#e41e1e', display: 'block' }}>Sociétale</span>
+                <span style={{ color: '#1a2340', display: 'block' }}>{t('heading1')}</span>
+                <span style={{ color: '#e41e1e', display: 'block' }}>{t('heading2')}</span>
               </h2>
 
               <p style={{ color: '#4b5563', fontSize: 15.5, lineHeight: 1.8, marginBottom: 36, maxWidth: 520 }}>
-                BNB Groupe s&apos;engage activement dans le développement des communautés africaines.
-                Éducation, santé, environnement et développement économique sont au cœur de
-                nos actions à travers tout le continent.
+                {t('para')}
               </p>
 
               <Link
@@ -111,7 +110,7 @@ export default function CSRPreviewSection() {
                   el.style.boxShadow = '0 4px 20px rgba(228,30,30,0.32)';
                 }}
               >
-                Découvrir nos initiatives
+                {t('cta')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -155,23 +154,23 @@ export default function CSRPreviewSection() {
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
               <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
               <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
-                Témoignages
+                {t('testimonialsLabel')}
               </span>
               <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
             </div>
             <h2 style={{ fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)', fontWeight: 800, color: '#1a2340', marginBottom: 12 }}>
-              Ils témoignent de notre impact
+              {t('testimonialsHeading')}
             </h2>
             <p style={{ color: '#6b7280', fontSize: 15, maxWidth: 480, margin: '0 auto', lineHeight: 1.65 }}>
-              Des partenaires et bénéficiaires partagent leur expérience avec BNB Groupe.
+              {t('testimonialsSubtitle')}
             </p>
           </div>
 
           {/* 3 testimonial cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
-            {TESTIMONIALS.map((t, i) => (
+            {TESTIMONIALS.map((item, i) => (
               <motion.div
-                key={t.name}
+                key={item.name}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -209,7 +208,7 @@ export default function CSRPreviewSection() {
                   textTransform: 'uppercase', padding: '4px 12px', borderRadius: 20,
                   marginBottom: 18, width: 'fit-content',
                 }}>
-                  {t.category}
+                  {item.category}
                 </div>
 
                 {/* Quote text */}
@@ -217,7 +216,7 @@ export default function CSRPreviewSection() {
                   fontSize: 14.5, color: '#374151', lineHeight: 1.75,
                   fontStyle: 'italic', flexGrow: 1, marginBottom: 28,
                 }}>
-                  &ldquo;{t.quote}&rdquo;
+                  &ldquo;{item.quote}&rdquo;
                 </p>
 
                 {/* Divider */}
@@ -232,15 +231,15 @@ export default function CSRPreviewSection() {
                     flexShrink: 0,
                   }}>
                     <span style={{ color: '#fff', fontSize: 16, fontWeight: 700 }}>
-                      {t.name.charAt(0)}
+                      {item.name.charAt(0)}
                     </span>
                   </div>
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 700, color: '#1a2340', lineHeight: 1.2 }}>
-                      {t.name}
+                      {item.name}
                     </div>
                     <div style={{ fontSize: 12.5, color: '#9ca3af', marginTop: 2, lineHeight: 1.3 }}>
-                      {t.role}
+                      {item.role}
                     </div>
                   </div>
                 </div>

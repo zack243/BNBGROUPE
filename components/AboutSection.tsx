@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useLocale } from '@/lib/i18n-context';
+import { useLocale, useTranslations } from '@/lib/i18n-context';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
@@ -18,6 +18,7 @@ const BRANDS = [
 
 export default function AboutSection() {
   const locale = useLocale();
+  const t = useTranslations('about');
   const trackRef = useRef<HTMLDivElement>(null);
 
   const tripled = [...BRANDS, ...BRANDS, ...BRANDS];
@@ -60,27 +61,23 @@ export default function AboutSection() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
                 <div style={{ width: 32, height: 2, background: '#e41e1e' }} />
                 <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
-                  À propos de BNB Groupe
+                  {t('label')}
                 </span>
               </div>
 
               {/* Title */}
               <h2 style={{ fontSize: 'clamp(1.9rem, 2.8vw, 2.6rem)', fontWeight: 800, color: '#1a2340', lineHeight: 1.2, marginBottom: 24 }}>
-                Une entreprise africaine,<br />
-                des marques qui{' '}
-                <span style={{ color: '#e41e1e' }}>inspirent</span>
+                {t('heading1')}<br />
+                {t('heading2')}{' '}
+                <span style={{ color: '#e41e1e' }}>{t('headingAccent')}</span>
               </h2>
 
               {/* Paragraphs */}
               <p style={{ color: '#4b5563', fontSize: 15, lineHeight: 1.75, marginBottom: 16 }}>
-                BNB Groupe est un groupe panafricain dédié à la création,
-                au développement et à la distribution de marques fortes qui
-                améliorent le quotidien de millions de personnes à travers l&apos;Afrique.
+                {t('para1')}
               </p>
               <p style={{ color: '#4b5563', fontSize: 15, lineHeight: 1.75, marginBottom: 36 }}>
-                Notre mission est simple : offrir des produits et services de qualité,
-                accessibles et innovants, tout en ayant un impact positif et durable
-                sur nos communautés.
+                {t('para2')}
               </p>
 
               {/* CTA */}
@@ -112,7 +109,7 @@ export default function AboutSection() {
                   (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 20px rgba(228,30,30,0.32)';
                 }}
               >
-                Découvrir notre histoire
+                {t('cta')}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>

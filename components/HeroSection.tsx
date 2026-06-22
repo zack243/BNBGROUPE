@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useLocale } from '@/lib/i18n-context';
+import { useLocale, useTranslations } from '@/lib/i18n-context';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -12,6 +12,8 @@ const AUTOPLAY_INTERVAL = 4000;
 
 export default function HeroSection() {
   const locale = useLocale();
+  const th = useTranslations('hero');
+  const ts = useTranslations('stats');
   const [activeSlide, setActiveSlide] = useState(0);
 
   const goTo = useCallback((index: number) => {
@@ -102,15 +104,12 @@ export default function HeroSection() {
             className="text-white font-bold mb-6"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.18, maxWidth: 620 }}
           >
-            Des marques{' '}
+            {th('line1')}
             <br />
-            de{' '}
-            <span style={{ color: '#e41e1e' }}>confiance,</span>
+            {th('line2')}
             <br />
-            au cœur du quotidien
-            <br />
-            des{' '}
-            <span style={{ color: '#3b82f6' }}>Africains.</span>
+            {th('line3')}{' '}
+            <span style={{ color: '#3b82f6' }}>{th('line3Accent')}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -120,9 +119,7 @@ export default function HeroSection() {
             transition={{ delay: 0.5, duration: 0.6 }}
             style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, maxWidth: 480, lineHeight: 1.65, marginBottom: 36 }}
           >
-            Nous créons, développons et distribuons des marques
-            qui améliorent le quotidien de millions de personnes
-            à travers l&apos;Afrique.
+            {th('description2')}
           </motion.p>
 
           {/* CTA Button */}
@@ -156,7 +153,7 @@ export default function HeroSection() {
                 (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
               }}
             >
-              Découvrir nos Focus Brands
+              {th('cta')}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -241,7 +238,7 @@ export default function HeroSection() {
                   </svg>
                 ),
                 value: '20+',
-                label: 'Pays de présence',
+                label: ts('countries'),
               },
               {
                 icon: (
@@ -252,7 +249,7 @@ export default function HeroSection() {
                   </svg>
                 ),
                 value: '10 000+',
-                label: 'Collaborateurs',
+                label: ts('employees'),
               },
               {
                 icon: (
@@ -262,7 +259,7 @@ export default function HeroSection() {
                   </svg>
                 ),
                 value: '500+',
-                label: 'Marques distribuées',
+                label: ts('brands'),
               },
               {
                 icon: (
@@ -272,7 +269,7 @@ export default function HeroSection() {
                   </svg>
                 ),
                 value: '30+',
-                label: "Années d'expérience",
+                label: ts('experience'),
               },
             ].map((stat, i) => (
               <motion.div

@@ -1,18 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useLocale } from '@/lib/i18n-context';
+import { useLocale, useTranslations } from '@/lib/i18n-context';
 import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
-const NAV_LINKS = (locale: string) => [
-  { label: 'Accueil',                  href: `/${locale}/` },
-  { label: 'À propos',                 href: `/${locale}/about-us/` },
-  { label: 'Produits',                 href: `/${locale}/food-beverages/` },
-  { label: 'Focus Brands',             href: `/${locale}/focus-brand/` },
-  { label: 'Responsabilité Sociétale', href: `/${locale}/csr/` },
-  { label: 'Carrières',                href: `/${locale}/career/` },
-  { label: 'Actualités',               href: `/${locale}/events-news/` },
-  { label: 'Contact',                  href: `/${locale}/contact/` },
+const NAV_HREFS = (locale: string) => [
+  { key: 'home',        href: `/${locale}/` },
+  { key: 'about',       href: `/${locale}/about-us/` },
+  { key: 'products',    href: `/${locale}/food-beverages/` },
+  { key: 'focusBrands', href: `/${locale}/focus-brand/` },
+  { key: 'csr',         href: `/${locale}/csr/` },
+  { key: 'career',      href: `/${locale}/career/` },
+  { key: 'news',        href: `/${locale}/events-news/` },
+  { key: 'contact',     href: `/${locale}/contact/` },
 ];
 
 const BRAND_LOGOS = [
@@ -59,8 +59,9 @@ function YouTubeIcon() {
 
 export default function Footer() {
   const locale = useLocale();
+  const tf = useTranslations('footer');
   const year = new Date().getFullYear();
-  const navLinks = NAV_LINKS(locale);
+  const navLinks = NAV_HREFS(locale);
 
   return (
     <footer>
@@ -76,11 +77,10 @@ export default function Footer() {
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
           <div>
             <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2rem)', fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 10 }}>
-              Construisons l&apos;avenir <span style={{ color: 'rgba(255,255,255,0.85)' }}>ensemble.</span>
+              {tf('ctaHeading')}
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: 15, lineHeight: 1.65, maxWidth: 480 }}>
-              Découvrez les marques et solutions qui améliorent le quotidien<br />
-              de millions de personnes.
+              {tf('ctaSub')}
             </p>
           </div>
           <Link
@@ -106,7 +106,7 @@ export default function Footer() {
               el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.18)';
             }}
           >
-            Nous contacter <ArrowRight style={{ width: 18, height: 18 }} />
+            {tf('ctaBtn')} <ArrowRight style={{ width: 18, height: 18 }} />
           </Link>
         </div>
       </div>
@@ -133,9 +133,7 @@ export default function Footer() {
                 <span style={{ fontSize: 28, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>BNB Groupe</span>
               </Link>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13.5, lineHeight: 1.75, marginBottom: 24, maxWidth: 260 }}>
-                BNB Groupe est un groupe panafricain spécialisé dans le développement,
-                la distribution et la promotion de marques qui améliorent le quotidien
-                des consommateurs.
+                {tf('description')}
               </p>
               <div style={{ display: 'flex', gap: 10 }}>
                 {[
@@ -173,7 +171,7 @@ export default function Footer() {
             {/* COL 2 — Navigation */}
             <div>
               <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
-                Navigation
+                {tf('navTitle')}
               </h4>
               <div style={{ width: 28, height: 2, background: '#e41e1e', marginBottom: 20 }} />
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -184,7 +182,7 @@ export default function Footer() {
                       onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.65)'; }}
                     >
                       <span style={{ color: '#e41e1e', fontSize: 11 }}>›</span>
-                      {link.label}
+                      {tf(`nav.${link.key}`)}
                     </Link>
                   </li>
                 ))}
@@ -194,7 +192,7 @@ export default function Footer() {
             {/* COL 3 — Contact */}
             <div>
               <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
-                Contact
+                {tf('contactTitle')}
               </h4>
               <div style={{ width: 28, height: 2, background: '#e41e1e', marginBottom: 20 }} />
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -230,7 +228,7 @@ export default function Footer() {
       <div style={{ background: '#132f7a', borderTop: '1px solid rgba(255,255,255,0.10)', padding: '14px 0' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>
-            © {year} BNB Groupe. Tous droits réservés.
+            © {year} BNB Groupe. {tf('rights')}
           </span>
           <div style={{ display: 'flex', gap: 24 }}>
             {[

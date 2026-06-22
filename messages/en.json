@@ -22,12 +22,20 @@
     "subtitle": "Leading Distribution Company in the Democratic Republic of Congo",
     "description": "Since 1997, we have been connecting major international brands to millions of consumers in the DRC with excellence and innovation.",
     "ctaPrimary": "Discover",
-    "ctaSecondary": "Contact Us"
+    "ctaSecondary": "Contact Us",
+    "line1": "Trusted brands,",
+    "line2": "at the heart of everyday life",
+    "line3": "for",
+    "line3Accent": "Africans.",
+    "description2": "We create, develop and distribute brands that improve the daily lives of millions of people across Africa.",
+    "cta": "Discover our Focus Brands"
   },
   "stats": {
-    "brands": "Associated Brands",
+    "countries": "Countries",
+    "employees": "Employees",
+    "brands": "Brands distributed",
+    "experience": "Years of experience",
     "products": "Quality Products",
-    "experience": "Years of Experience",
     "coverage": "National Coverage"
   },
   "about": {
@@ -41,7 +49,36 @@
     "vision": "Our Vision",
     "visionText": "To become the preferred distribution partner for major global brands in the DRC.",
     "values": "Our Values",
-    "valuesText": "Ambitious • Hardworking • Resourceful"
+    "valuesText": "Ambitious • Hardworking • Resourceful",
+    "label": "About BNB Groupe",
+    "heading1": "An African company,",
+    "heading2": "brands that",
+    "headingAccent": "inspire",
+    "para1": "BNB Groupe is a pan-African group dedicated to creating, developing and distributing strong brands that improve the daily lives of millions of people across Africa.",
+    "para2": "Our mission is simple: offer quality, accessible and innovative products and services, while having a positive and lasting impact on our communities.",
+    "cta": "Discover our story",
+    "brandsTitle": "Our Associated Brands"
+  },
+  "categories": {
+    "label": "Our Categories",
+    "heading": "Key",
+    "headingAccent": "categories",
+    "subtitle": "Discover our full range of quality products across all major sectors.",
+    "alimentaire": "Food & Beverages",
+    "hygiene": "Health & Hygiene",
+    "entretien": "Home Care",
+    "electronique": "Electronics",
+    "distribution": "Distribution"
+  },
+  "csrHome": {
+    "label": "Our Commitment",
+    "heading1": "Corporate",
+    "heading2": "Responsibility",
+    "para": "BNB Groupe is actively committed to the development of African communities. Education, health, environment and economic development are at the heart of our actions across the continent.",
+    "cta": "Discover our initiatives",
+    "testimonialsLabel": "Testimonials",
+    "testimonialsHeading": "They speak of our impact",
+    "testimonialsSubtitle": "Partners and beneficiaries share their experience with BNB Groupe."
   },
   "business": {
     "title": "Business Portfolio",
@@ -149,6 +186,22 @@
     "products": "Products",
     "contact": "Contact",
     "followUs": "Follow Us",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "description": "BNB Groupe is a pan-African group specialising in the development, distribution and promotion of brands that improve the daily lives of consumers.",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "ctaHeading": "Let's build the future together.",
+    "ctaSub": "Discover the brands and solutions that improve the daily lives of millions of people.",
+    "ctaBtn": "Contact us",
+    "nav": {
+      "home": "Home",
+      "about": "About Us",
+      "products": "Products",
+      "focusBrands": "Focus Brands",
+      "csr": "Corporate Responsibility",
+      "career": "Careers",
+      "news": "News",
+      "contact": "Contact"
+    }
   }
 }

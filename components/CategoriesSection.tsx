@@ -1,43 +1,43 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useLocale } from '@/lib/i18n-context';
+import { useLocale, useTranslations } from '@/lib/i18n-context';
 import Link from 'next/link';
 import { ArrowRight, ShoppingCart, Heart, Home, Monitor, Truck } from 'lucide-react';
 
 const CATEGORIES = [
   {
-    label: 'Alimentaire',
+    key: 'alimentaire',
     href: 'food-beverages',
-    image: '/images/bnb/products/food-beverages.jpg',
+    image: '/images/bnb/products/cat-alimentaire.png',
     accent: '#e41e1e',
     icon: ShoppingCart,
   },
   {
-    label: 'Hygiène & Santé',
+    key: 'hygiene',
     href: 'health-and-hygiene',
-    image: '/images/bnb/products/health-hygiene.jpg',
+    image: '/images/bnb/products/cat-hygiene.png',
     accent: '#16a34a',
     icon: Heart,
   },
   {
-    label: 'Entretien de la Maison',
+    key: 'entretien',
     href: 'home-care',
-    image: '/images/bnb/products/home-care.jpg',
+    image: '/images/bnb/products/cat-entretien.png',
     accent: '#1a2340',
     icon: Home,
   },
   {
-    label: 'Électronique',
+    key: 'electronique',
     href: 'electronics-home-appliances',
-    image: '/images/bnb/products/electronics.jpg',
+    image: '/images/bnb/products/cat-electronique.png',
     accent: '#7c3aed',
     icon: Monitor,
   },
   {
-    label: 'Distribution',
+    key: 'distribution',
     href: 'distribution',
-    image: '/images/bnb/products/personal-care.jpg',
+    image: '/images/bnb/products/cat-distribution.png',
     accent: '#f97316',
     icon: Truck,
   },
@@ -45,6 +45,7 @@ const CATEGORIES = [
 
 export default function CategoriesSection() {
   const locale = useLocale();
+  const t = useTranslations('categories');
 
   return (
     <section style={{
@@ -73,17 +74,15 @@ export default function CategoriesSection() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 24, height: 2, background: '#e41e1e' }} />
             <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-              Nos Catégories
+              {t('label')}
             </span>
             <div style={{ width: 24, height: 2, background: '#e41e1e' }} />
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 3.2vw, 3rem)', fontWeight: 900, color: '#1a2340', lineHeight: 1.15, marginBottom: 16 }}>
-            Des produits de qualité<br />
-            dans des <span style={{ color: '#e41e1e' }}>catégories clés</span>
+            {t('heading')} <span style={{ color: '#e41e1e' }}>{t('headingAccent')}</span>
           </h2>
           <p style={{ color: '#4b5563', fontSize: 15.5, lineHeight: 1.7, maxWidth: 520, margin: '0 auto' }}>
-            BNB Groupe propose une large gamme de produits de qualité,<br />
-            conçus pour améliorer le quotidien des consommateurs.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -124,7 +123,7 @@ export default function CategoriesSection() {
                   <div style={{ position: 'relative', flex: '0 0 240px', overflow: 'hidden', background: '#f5f5f5' }}>
                     <img
                       src={cat.image}
-                      alt={cat.label}
+                      alt={t(cat.key)}
                       style={{ width: '100%', height: 240, objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }}
                     />
                   </div>
@@ -147,7 +146,7 @@ export default function CategoriesSection() {
 
                     {/* Title */}
                     <span style={{ color: '#fff', fontSize: 16, fontWeight: 700, lineHeight: 1.2 }}>
-                      {cat.label}
+                      {t(cat.key)}
                     </span>
 
                     {/* Arrow */}

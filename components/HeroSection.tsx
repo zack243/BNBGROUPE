@@ -65,10 +65,10 @@ export default function HeroSection() {
             <img src="/images/bnb/hero/bomdia.png" alt="Bom Dia" className="hero-card-img" />
           </div>
           <div className="hero-card card-mid">
-            <img src="/images/bnb/hero/card5.png" alt="Simba" className="hero-card-img" />
+            <img src="/images/bnb/hero/card2.png" alt="Brand 2" className="hero-card-img" />
           </div>
           <div className="hero-card card-back">
-            <img src="/images/bnb/hero/card6.png" alt="Volcan" className="hero-card-img" />
+            <img src="/images/bnb/hero/card3.png" alt="Brand 3" className="hero-card-img" />
           </div>
         </div>
 

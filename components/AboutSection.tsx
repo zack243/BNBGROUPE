@@ -15,14 +15,6 @@ const BRANDS = [
   { name: 'Volcan',       src: '/images/bnb/logo/Volcan.png' },
 ];
 
-const MOSAIC = [
-  { src: '/images/bnb/about/about-office.jpg', alt: 'BNB Siège', className: 'about-mosaic-main' },
-  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 1',  className: 'about-mosaic-tr' },
-  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 2',  className: 'about-mosaic-mr' },
-  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 3',  className: 'about-mosaic-bl' },
-  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 4',  className: 'about-mosaic-bm' },
-  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 5',  className: 'about-mosaic-br' },
-];
 
 export default function AboutSection() {
   const locale = useLocale();
@@ -119,12 +111,11 @@ export default function AboutSection() {
               transition={{ duration: 0.7, delay: 0.15 }}
               style={{ flex: '0 0 62%', maxWidth: '62%' }}
             >
-              <div className="about-mosaic-grid">
-                {MOSAIC.map((img) => (
-                  <div key={img.className} className={`about-mosaic-cell ${img.className}`}>
-                    <img src={img.src} alt={img.alt} />
-                  </div>
-                ))}
+              <div className="about-mosaic-single">
+                <img
+                  src="/images/bnb/about/about-office.jpg"
+                  alt="BNB Groupe — bureaux et siège"
+                />
               </div>
             </motion.div>
 

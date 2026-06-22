@@ -1,163 +1,270 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations, useLocale } from '@/lib/i18n-context';
-import { motion } from 'framer-motion';
-import { Facebook, Linkedin, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import { useLocale } from '@/lib/i18n-context';
+import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react';
+
+const NAV_LINKS = (locale: string) => [
+  { label: 'Accueil',                  href: `/${locale}/` },
+  { label: 'À propos',                 href: `/${locale}/about-us/` },
+  { label: 'Produits',                 href: `/${locale}/food-beverages/` },
+  { label: 'Focus Brands',             href: `/${locale}/focus-brand/` },
+  { label: 'Responsabilité Sociétale', href: `/${locale}/csr/` },
+  { label: 'Carrières',                href: `/${locale}/career/` },
+  { label: 'Actualités',               href: `/${locale}/events-news/` },
+  { label: 'Contact',                  href: `/${locale}/contact/` },
+];
+
+const BRAND_LOGOS = [
+  { name: 'Calcident',    src: '/images/bnb/logo/Calcident.png' },
+  { name: 'Bon Appétit',  src: '/images/bnb/logo/Bon Appetit (1).png' },
+  { name: 'Bon Déjeuner', src: '/images/bnb/logo/Bon Dejeuner.png' },
+  { name: 'Bom Dia',      src: '/images/bnb/logo/Bom Dia  - Logo vert.png' },
+  { name: 'Simba',        src: '/images/bnb/logo/Simba.png' },
+  { name: 'Volcan',       src: '/images/bnb/logo/Volcan.png' },
+];
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+    </svg>
+  );
+}
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+function YouTubeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+      <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+    </svg>
+  );
+}
 
 export default function Footer() {
-  const t = useTranslations('footer');
   const locale = useLocale();
-
-  const currentYear = new Date().getFullYear();
-
-  const footerLinks = {
-    company: [
-      { label: t('nav.about'), href: `/${locale}/about-us/` },
-      { label: t('nav.businessPortfolio'), href: `/${locale}/business-portfolio/` },
-      { label: t('nav.career'), href: `/${locale}/career/` },
-      { label: t('nav.csr'), href: `/${locale}/csr/` },
-    ],
-    products: [
-      { label: t('products.foodBeverages'), href: `/${locale}/food-beverages/` },
-      { label: t('products.healthHygiene'), href: `/${locale}/health-and-hygiene/` },
-      { label: t('products.personalCare'), href: `/${locale}/personal-care-products/` },
-      { label: t('products.homeCare'), href: `/${locale}/home-care/` },
-      { label: t('products.electronics'), href: `/${locale}/electronics-home-appliances/` },
-    ],
-  };
-
-  const socialLinks = [
-    { icon: Facebook, href: 'https://facebook.com/bnbgroupe', label: 'Facebook' },
-    { icon: Linkedin, href: 'https://linkedin.com/company/bnbgroupe', label: 'LinkedIn' },
-    { icon: Instagram, href: 'https://instagram.com/bnbgroupe', label: 'Instagram' },
-    { icon: Twitter, href: 'https://twitter.com/bnbgroupe', label: 'Twitter' },
-  ];
+  const year = new Date().getFullYear();
+  const navLinks = NAV_LINKS(locale);
 
   return (
-    <footer className="bg-bnb-blue-950 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-bnb-orange-500 to-bnb-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">BNB</span>
-              </div>
-              <span className="text-2xl font-bold">Groupe</span>
-            </div>
-            <p className="text-bnb-gray-300 text-sm leading-relaxed mb-6">
-              Société Biso Na Biso Sarl - La plus grande entreprise de distribution 
-              en République Démocratique du Congo depuis 1997.
+    <footer>
+      {/* ── CTA BANNER ── */}
+      <div style={{
+        background: 'linear-gradient(135deg, #f0f7ff 0%, #fff8f4 60%, #fef3ec 100%)',
+        borderTop: '1px solid #e8edf5',
+        padding: '44px 0',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{ position: 'absolute', top: -60, right: -60, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
+          <div>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2rem)', fontWeight: 800, color: '#1a2340', lineHeight: 1.2, marginBottom: 10 }}>
+              Construisons l&apos;avenir <span style={{ color: '#e41e1e' }}>ensemble.</span>
+            </h2>
+            <p style={{ color: '#4b5563', fontSize: 15, lineHeight: 1.65, maxWidth: 480 }}>
+              Découvrez les marques et solutions qui améliorent le quotidien<br />
+              de millions de personnes.
             </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-bnb-orange-500 transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Company Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+          </div>
+          <Link
+            href={`/${locale}/contact/`}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              background: '#e41e1e', color: '#fff',
+              fontWeight: 700, fontSize: 15, padding: '15px 32px',
+              borderRadius: 6, whiteSpace: 'nowrap', flexShrink: 0,
+              boxShadow: '0 4px 20px rgba(228,30,30,0.28)',
+              transition: 'all 0.22s ease', textDecoration: 'none',
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.background = '#c41616';
+              el.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.background = '#e41e1e';
+              el.style.transform = 'translateY(0)';
+            }}
           >
-            <h3 className="text-lg font-semibold mb-6">{t('company')}</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-bnb-gray-300 hover:text-bnb-orange-400 transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Products Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h3 className="text-lg font-semibold mb-6">{t('products')}</h3>
-            <ul className="space-y-3">
-              {footerLinks.products.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-bnb-gray-300 hover:text-bnb-orange-400 transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h3 className="text-lg font-semibold mb-6">{t('contact')}</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-bnb-orange-500 mt-0.5 flex-shrink-0" />
-                <span className="text-bnb-gray-300 text-sm">
-                  123 Avenue de la Libération<br />
-                  Kinshasa, RDC
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-bnb-orange-500 flex-shrink-0" />
-                <span className="text-bnb-gray-300 text-sm">+243 123 456 789</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-bnb-orange-500 flex-shrink-0" />
-                <span className="text-bnb-gray-300 text-sm">contact@bnbgroupe.com</span>
-              </li>
-            </ul>
-          </motion.div>
+            Nous contacter <ArrowRight style={{ width: 18, height: 18 }} />
+          </Link>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="py-6 border-t border-white/10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-bnb-gray-400 text-sm">
-              © {currentYear} BNB Groupe. {t('rights')}
-            </p>
-            <div className="flex items-center gap-6 text-sm text-bnb-gray-400">
-              <Link href={`/${locale}/privacy-policy/`} className="hover:text-white transition-colors">
-                Privacy Policy
+      {/* ── MAIN DARK FOOTER ── */}
+      <div style={{ background: '#0f2356', padding: '56px 0 40px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1.3fr', gap: 48 }}>
+
+            {/* COL 1 — Brand */}
+            <div>
+              <Link href={`/${locale}/`} style={{ display: 'inline-block', marginBottom: 20 }}>
+                <img src="/images/bnb/logo/logo bnb.avif" alt="BNB Groupe" style={{ height: 52, width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </Link>
-              <Link href={`/${locale}/terms-of-service/`} className="hover:text-white transition-colors">
-                Terms of Service
-              </Link>
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13.5, lineHeight: 1.75, marginBottom: 24, maxWidth: 260 }}>
+                BNB Groupe est un groupe panafricain spécialisé dans le développement,
+                la distribution et la promotion de marques qui améliorent le quotidien
+                des consommateurs.
+              </p>
+              <div style={{ display: 'flex', gap: 10 }}>
+                {[
+                  { icon: <FacebookIcon />, href: 'https://www.facebook.com/bnbgroupe', label: 'Facebook' },
+                  { icon: <InstagramIcon />, href: 'https://www.instagram.com/bnbgroupe', label: 'Instagram' },
+                  { icon: <LinkedInIcon />, href: 'https://www.linkedin.com/company/bnbgroupe', label: 'LinkedIn' },
+                  { icon: <YouTubeIcon />, href: 'https://www.youtube.com/@bnbgroupe', label: 'YouTube' },
+                ].map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                    style={{
+                      width: 38, height: 38, borderRadius: '50%',
+                      border: '1.5px solid rgba(255,255,255,0.25)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: 'rgba(255,255,255,0.7)', transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.background = '#e41e1e';
+                      el.style.borderColor = '#e41e1e';
+                      el.style.color = '#fff';
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.background = 'transparent';
+                      el.style.borderColor = 'rgba(255,255,255,0.25)';
+                      el.style.color = 'rgba(255,255,255,0.7)';
+                    }}
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
             </div>
+
+            {/* COL 2 — Navigation */}
+            <div>
+              <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
+                Navigation
+              </h4>
+              <div style={{ width: 28, height: 2, background: '#e41e1e', marginBottom: 20 }} />
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13.5, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 6, transition: 'color 0.2s' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#fff'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.65)'; }}
+                    >
+                      <span style={{ color: '#e41e1e', fontSize: 11 }}>›</span>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COL 3 — Nos Marques */}
+            <div>
+              <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
+                Nos Marques
+              </h4>
+              <div style={{ width: 28, height: 2, background: '#e41e1e', marginBottom: 20 }} />
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {BRAND_LOGOS.map((brand) => (
+                  <li key={brand.name} style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: 12 }}>
+                    <Link href={`/${locale}/focus-brand/`} style={{ display: 'inline-block', textDecoration: 'none', transition: 'opacity 0.2s' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.8'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+                    >
+                      <img src={brand.src} alt={brand.name} style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COL 4 — Contact */}
+            <div>
+              <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
+                Contact
+              </h4>
+              <div style={{ width: 28, height: 2, background: '#e41e1e', marginBottom: 20 }} />
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 18 }}>
+                {[
+                  { icon: <MapPin style={{ width: 16, height: 16, flexShrink: 0 }} />, label: 'Adresse', value: 'Future Tower, Kinshasa' },
+                  { icon: <Phone style={{ width: 16, height: 16, flexShrink: 0 }} />, label: 'Téléphone', value: '+243 XXX XXX XXX' },
+                  { icon: <Mail style={{ width: 16, height: 16, flexShrink: 0 }} />, label: 'Email', value: 'contact@bnbgroupe.com' },
+                  { icon: <Clock style={{ width: 16, height: 16, flexShrink: 0 }} />, label: 'Horaires', value: 'Lun - Ven\n08h00 - 17h00' },
+                ].map((item) => (
+                  <li key={item.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                    <div style={{
+                      width: 34, height: 34, borderRadius: '50%',
+                      border: '1.5px solid rgba(255,255,255,0.2)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: 'rgba(255,255,255,0.7)', flexShrink: 0,
+                    }}>
+                      {item.icon}
+                    </div>
+                    <div>
+                      <div style={{ color: '#fff', fontSize: 13, fontWeight: 600, marginBottom: 2 }}>{item.label}</div>
+                      <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, whiteSpace: 'pre-line' }}>{item.value}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* ── BOTTOM BRAND STRIP ── */}
+      <div style={{ background: '#0a1d47', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '20px 0' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', gap: 32, overflowX: 'auto' }}>
+          {BRAND_LOGOS.map((brand) => (
+            <Link key={brand.name} href={`/${locale}/focus-brand/`} style={{ flexShrink: 0, opacity: 0.75, transition: 'opacity 0.2s', textDecoration: 'none' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.75'; }}
+            >
+              <img src={brand.src} alt={brand.name} style={{ height: 32, width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* ── COPYRIGHT BAR ── */}
+      <div style={{ background: '#0a1d47', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '14px 0' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+          <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>
+            © {year} BNB Groupe. Tous droits réservés.
+          </span>
+          <div style={{ display: 'flex', gap: 24 }}>
+            {[
+              { label: 'Politique de confidentialité', href: `/${locale}/privacy-policy/` },
+              { label: "Conditions d'utilisation", href: `/${locale}/terms-of-service/` },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#fff'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.45)'; }}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ export default async function LocaleLayout({
   return (
     <I18nProvider messages={messages} locale={locale}>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-[72px]">
         {children}
       </main>
       <Footer />

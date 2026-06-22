@@ -1,158 +1,165 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { useTranslations, useLocale } from '@/lib/i18n-context';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { useLocale } from '@/lib/i18n-context';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import LanguageSwitch from './LanguageSwitch';
-import { cn } from '@/lib/utils';
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+    </svg>
+  );
+}
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+function YouTubeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+    </svg>
+  );
+}
 
 export default function Navbar() {
-  const t = useTranslations('nav');
   const locale = useLocale();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems = [
-    { label: t('about'), href: `/${locale}/about-us/` },
-    { label: t('businessPortfolio'), href: `/${locale}/business-portfolio/` },
-    {
-      label: t('products'),
-      href: '#',
-      children: [
-        { label: t('products') + ' - ' + t('foodBeverages'), href: `/${locale}/food-beverages/` },
-        { label: t('products') + ' - ' + t('healthHygiene'), href: `/${locale}/health-and-hygiene/` },
-        { label: t('products') + ' - ' + t('personalCare'), href: `/${locale}/personal-care-products/` },
-        { label: t('products') + ' - ' + t('homeCare'), href: `/${locale}/home-care/` },
-        { label: t('products') + ' - ' + t('babyCare'), href: `/${locale}/baby-care/` },
-        { label: t('products') + ' - ' + t('electronics'), href: `/${locale}/electronics-home-appliances/` },
-        { label: t('products') + ' - ' + t('automobile'), href: `/${locale}/automobile/` },
-        { label: t('products') + ' - ' + t('stationary'), href: `/${locale}/stationary/` },
-        { label: t('products') + ' - ' + t('furniture'), href: `/${locale}/furniture-fittings/` },
-      ],
-    },
-    { label: t('focusBrand'), href: `/${locale}/focus-brand/` },
-    { label: t('distribution'), href: `/${locale}/distribution/` },
-    { label: t('eventsNews'), href: `/${locale}/events-news/` },
-    { label: t('csr'), href: `/${locale}/csr/` },
-    { label: t('career'), href: `/${locale}/career/` },
+    { label: 'Accueil', href: `/${locale}/` },
+    { label: 'À propos', href: `/${locale}/about-us/` },
+    { label: 'Notre portefeuille', href: `/${locale}/business-portfolio/` },
+    { label: 'Focus Brands', href: `/${locale}/focus-brand/` },
+    { label: 'Responsabilité Sociétale', href: `/${locale}/csr/` },
+    { label: 'Carrières', href: `/${locale}/career/` },
+    { label: 'Actualités', href: `/${locale}/events-news/` },
+    { label: 'Contact', href: `/${locale}/contact/` },
+  ];
+
+  const socialLinks = [
+    { icon: <FacebookIcon />, href: 'https://www.facebook.com/bnbgroupe', label: 'Facebook' },
+    { icon: <InstagramIcon />, href: 'https://www.instagram.com/bnbgroupe', label: 'Instagram' },
+    { icon: <LinkedInIcon />, href: 'https://www.linkedin.com/company/bnbgroupe', label: 'LinkedIn' },
+    { icon: <YouTubeIcon />, href: 'https://www.youtube.com/@bnbgroupe', label: 'YouTube' },
   ];
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg'
-            : 'bg-white/80 backdrop-blur-sm'
-        )}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm"
+        style={{ height: 72 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href={`/${locale}/`} className="flex items-center">
-              <img
-                src="/images/bnb/logo/bnb-logo.png"
-                alt="BNB Groupe"
-                className="h-12 w-auto object-contain"
-              />
-            </Link>
+        <div className="max-w-[1280px] mx-auto px-4 h-full flex items-center justify-between">
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => item.children && setActiveDropdown(item.label)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+          {/* Logo */}
+          <Link href={`/${locale}/`} className="flex-shrink-0 flex items-center">
+            <img
+              src="/images/bnb/logo/bnb-logo.png"
+              alt="BNB Groupe"
+              style={{ height: 48, width: 'auto', objectFit: 'contain' }}
+            />
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden xl:flex items-center gap-0">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href.replace(/\/$/, ''));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="relative px-3 py-1 text-sm font-medium transition-colors"
+                  style={{
+                    color: isActive ? '#e41e1e' : '#1a2340',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e'; }}
+                  onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#1a2340'; }}
                 >
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      'flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold tracking-wide transition-all duration-200 rounded-lg',
-                      'text-bnb-gray-700 hover:text-bnb-blue-700 hover:bg-bnb-blue-50/80',
-                      activeDropdown === item.label && 'text-bnb-blue-700 bg-bnb-blue-50'
-                    )}
-                  >
-                    {item.label}
-                    {item.children && (
-                      <ChevronDown className={cn(
-                        'w-4 h-4 transition-transform',
-                        activeDropdown === item.label && 'rotate-180'
-                      )} />
-                    )}
-                  </Link>
+                  {item.label}
+                  {isActive && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: -4,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '60%',
+                        height: 2,
+                        background: '#e41e1e',
+                        borderRadius: 2,
+                      }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
 
-                  {/* Dropdown Menu */}
-                  <AnimatePresence>
-                    {item.children && activeDropdown === item.label && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl border border-bnb-gray-100 overflow-hidden"
-                      >
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="block px-4 py-2 text-sm text-bnb-gray-700 hover:bg-bnb-blue-50 hover:text-bnb-blue-600 transition-colors"
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+          {/* Right: Language + Social */}
+          <div className="hidden xl:flex items-center gap-3">
+            <LanguageSwitch />
+            <div className="flex items-center gap-1 ml-2">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="flex items-center justify-center transition-colors"
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: '50%',
+                    border: '1px solid #e5e7eb',
+                    color: '#374151',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e';
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e41e1e';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = '#374151';
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e5e7eb';
+                  }}
+                >
+                  {s.icon}
+                </a>
               ))}
-            </nav>
-
-            {/* Right Section */}
-            <div className="flex items-center gap-6">
-              <LanguageSwitch className="hidden md:flex" />
-
-              <Link
-                href={`/${locale}/contact/`}
-                className={cn(
-                  'hidden md:inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg',
-                  'bg-bnb-blue-600 text-white hover:bg-bnb-blue-700 transition-all duration-200 shadow-md hover:shadow-lg'
-                )}
-              >
-                {t('contact')}
-              </Link>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-bnb-gray-700 hover:text-bnb-blue-600 transition-colors"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
-              </button>
             </div>
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="xl:hidden p-2 text-gray-700"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -176,39 +183,18 @@ export default function Navbar() {
                   <LanguageSwitch />
                 </div>
                 
-                <nav className="flex flex-col gap-2">
+                <nav className="flex flex-col gap-1">
                   {navItems.map((item) => (
-                    <div key={item.label}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-3 text-base font-medium text-bnb-gray-700 hover:bg-bnb-blue-50 hover:text-bnb-blue-600 rounded-lg transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                      {item.children && (
-                        <div className="ml-4 mt-1 flex flex-col gap-1">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className="block px-4 py-2 text-sm text-bnb-gray-600 hover:bg-bnb-blue-50 hover:text-bnb-blue-600 rounded-lg transition-colors"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 text-base font-medium rounded-lg transition-colors"
+                      style={{ color: '#1a2340' }}
+                    >
+                      {item.label}
+                    </Link>
                   ))}
-                  <Link
-                    href={`/${locale}/contact/`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="mt-4 px-4 py-3 text-base font-medium bg-bnb-blue-600 text-white rounded-lg text-center hover:bg-bnb-blue-700 transition-colors"
-                  >
-                    {t('contact')}
-                  </Link>
                 </nav>
               </div>
             </motion.div>

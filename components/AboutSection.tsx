@@ -1,102 +1,166 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslations, useLocale } from '@/lib/i18n-context';
+import { useLocale } from '@/lib/i18n-context';
 import Link from 'next/link';
-import { ArrowRight, Target, Eye, Award } from 'lucide-react';
-import AnimatedSection from './AnimatedSection';
-import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
+
+const BRANDS = [
+  { name: 'Calcident',    src: '/images/bnb/logo/Calcident.png' },
+  { name: 'Bon Appétit',  src: '/images/bnb/logo/Bon Appetit (1).png' },
+  { name: 'Bon Déjeuner', src: '/images/bnb/logo/Bon Dejeuner.png' },
+  { name: 'Bom Dia',      src: '/images/bnb/logo/Bom Dia  - Logo vert.png' },
+  { name: 'Simba',        src: '/images/bnb/logo/Simba.png' },
+  { name: 'Volcan',       src: '/images/bnb/logo/Volcan.png' },
+];
+
+const MOSAIC = [
+  { src: '/images/bnb/about/about-office.jpg', alt: 'BNB Siège', className: 'about-mosaic-main' },
+  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 1',  className: 'about-mosaic-tr' },
+  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 2',  className: 'about-mosaic-mr' },
+  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 3',  className: 'about-mosaic-bl' },
+  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 4',  className: 'about-mosaic-bm' },
+  { src: '/images/bnb/about/about-1.jpg',      alt: 'Bureau 5',  className: 'about-mosaic-br' },
+];
 
 export default function AboutSection() {
-  const t = useTranslations('about');
   const locale = useLocale();
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  const values = [
-    {
-      icon: Target,
-      title: t('mission'),
-      description: t('missionText'),
-    },
-    {
-      icon: Eye,
-      title: t('vision'),
-      description: t('visionText'),
-    },
-    {
-      icon: Award,
-      title: t('values'),
-      description: t('valuesText'),
-    },
-  ];
+  const doubled = [...BRANDS, ...BRANDS];
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <AnimatedSection>
-            <span className="inline-block px-4 py-2 rounded-full bg-bnb-blue-50 text-bnb-blue-700 text-sm font-semibold mb-6">
-              {t('subtitle')}
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-bnb-gray-900 mb-6">
-              {t('title')}
-            </h2>
-            <p className="text-lg text-bnb-gray-600 leading-relaxed mb-8">
-              {t('description')}
-            </p>
-            
-            {/* Founded Badge */}
-            <div className="flex items-center gap-4 mb-8 p-4 bg-bnb-gray-50 rounded-xl">
-              <div className="w-16 h-16 bg-bnb-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-2xl">27+</span>
-              </div>
-              <div>
-                <p className="font-semibold text-bnb-gray-900">{t('founded')}</p>
-                <p className="text-bnb-gray-600">{t('foundedText')}</p>
-              </div>
-            </div>
+    <>
+      {/* ═══════════════════════════════════════════
+          ABOUT — 2-col layout
+      ═══════════════════════════════════════════ */}
+      <section
+        className="w-full"
+        style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #ffffff 100%)', padding: '80px 0 60px' }}
+      >
+        <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 56 }}>
 
-            <Link
-              href={`/${locale}/about-us/`}
-              className={cn(
-                'group inline-flex items-center gap-2 text-bnb-blue-600 font-semibold',
-                'hover:text-bnb-blue-700 transition-colors'
-              )}
+            {/* ── LEFT: 38% ── */}
+            <motion.div
+              initial={{ opacity: 0, x: -32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              style={{ flex: '0 0 38%', maxWidth: '38%' }}
             >
-              En savoir plus
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </AnimatedSection>
+              {/* Label */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+                <div style={{ width: 32, height: 2, background: '#e41e1e' }} />
+                <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+                  À propos de BNB Groupe
+                </span>
+              </div>
 
-          {/* Right Content - Values Cards */}
-          <div className="space-y-6">
-            {values.map((value, index) => (
-              <AnimatedSection key={value.title} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ x: 8 }}
-                  className={cn(
-                    'flex items-start gap-4 p-6 rounded-2xl',
-                    'bg-white border border-bnb-gray-100 shadow-sm',
-                    'hover:shadow-md hover:border-bnb-blue-200 transition-all'
-                  )}
-                >
-                  <div className="w-12 h-12 bg-bnb-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <value.icon className="w-6 h-6 text-bnb-blue-600" />
+              {/* Title */}
+              <h2 style={{ fontSize: 'clamp(1.9rem, 2.8vw, 2.6rem)', fontWeight: 800, color: '#1a2340', lineHeight: 1.2, marginBottom: 24 }}>
+                Une entreprise africaine,<br />
+                des marques qui{' '}
+                <span style={{ color: '#e41e1e' }}>inspirent</span>
+              </h2>
+
+              {/* Paragraphs */}
+              <p style={{ color: '#4b5563', fontSize: 15, lineHeight: 1.75, marginBottom: 16 }}>
+                BNB Groupe est un groupe panafricain dédié à la création,
+                au développement et à la distribution de marques fortes qui
+                améliorent le quotidien de millions de personnes à travers l&apos;Afrique.
+              </p>
+              <p style={{ color: '#4b5563', fontSize: 15, lineHeight: 1.75, marginBottom: 36 }}>
+                Notre mission est simple : offrir des produits et services de qualité,
+                accessibles et innovants, tout en ayant un impact positif et durable
+                sur nos communautés.
+              </p>
+
+              {/* CTA */}
+              <Link
+                href={`/${locale}/about-us/`}
+                className="group"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  background: '#e41e1e',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: 14,
+                  letterSpacing: '0.04em',
+                  padding: '14px 28px',
+                  borderRadius: 6,
+                  boxShadow: '0 4px 20px rgba(228,30,30,0.32)',
+                  transition: 'all 0.25s ease',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = '#c41616';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 28px rgba(228,30,30,0.44)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = '#e41e1e';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 20px rgba(228,30,30,0.32)';
+                }}
+              >
+                Découvrir notre histoire
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+
+            {/* ── RIGHT: 62% — mosaic ── */}
+            <motion.div
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              style={{ flex: '0 0 62%', maxWidth: '62%' }}
+            >
+              <div className="about-mosaic-grid">
+                {MOSAIC.map((img) => (
+                  <div key={img.className} className={`about-mosaic-cell ${img.className}`}>
+                    <img src={img.src} alt={img.alt} />
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-bnb-gray-900 mb-2">
-                      {value.title}
-                    </h3>
-                    <p className="text-bnb-gray-600">
-                      {value.description}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatedSection>
+                ))}
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          BRANDS CAROUSEL
+      ═══════════════════════════════════════════ */}
+      <section style={{ background: '#fff', borderTop: '1px solid #f0f0f0', padding: '56px 0 64px' }}>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+            <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
+            <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+              Nos Marques Associées
+            </span>
+            <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
+          </div>
+          <h2 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, color: '#1a2340' }}>
+            Un portefeuille de marques de confiance
+          </h2>
+        </div>
+
+        {/* Carousel track */}
+        <div className="brands-carousel-outer">
+          <div className="brands-carousel-track" ref={trackRef}>
+            {doubled.map((brand, i) => (
+              <div key={i} className="brands-carousel-item">
+                <img src={brand.src} alt={brand.name} />
+              </div>
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

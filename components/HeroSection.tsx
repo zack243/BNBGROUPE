@@ -9,47 +9,52 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 const TOTAL_SLIDES = 6;
 const AUTOPLAY_INTERVAL = 4000;
 
-/* ── Standalone card component (outside render fn to avoid remounts) ── */
-function PanelCard({
-  width, height, rotate, left, right, bottom, opacity, zIndex, delay, initX, side,
+/* ── Single card panel ── */
+const CARD_BG = 'linear-gradient(180deg, rgba(255,255,255,0.70) 0%, rgba(170,180,190,0.75) 45%, rgba(60,70,85,0.75) 100%)';
+const CARD_SHADOW = '0 40px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.65), 0 0 25px rgba(0,120,255,0.35)';
+
+function HeroCard({
+  cardTransform, zIndex, opacity, delay, initX,
 }: {
-  width: number; height: number; rotate: number;
-  left?: number | string; right?: number | string; bottom: number | string;
-  opacity: number; zIndex: number; delay: number; initX: number; side: 'left' | 'right';
+  cardTransform: string; zIndex: number; opacity?: number; delay: number; initX: number;
 }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: initX }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      animate={{ opacity: opacity ?? 1, x: 0 }}
+      transition={{ delay, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       style={{
-        position: 'absolute',
-        width,
-        height,
-        bottom,
-        ...(left !== undefined ? { left } : {}),
-        ...(right !== undefined ? { right } : {}),
-        borderRadius: 20,
-        transform: `rotate(${rotate}deg)`,
+        width: 170,
+        height: 460,
+        borderRadius: 22,
+        background: CARD_BG,
+        border: '1px solid rgba(255,255,255,0.35)',
+        boxShadow: CARD_SHADOW,
+        position: 'relative',
+        overflow: 'visible',
+        transform: cardTransform,
         zIndex,
-        opacity,
-        background: 'linear-gradient(175deg, #cdd6e4 0%, #a2b2c6 30%, #8294aa 60%, #657484 85%, #505e6e 100%)',
-        boxShadow: '0 32px 80px rgba(0,4,20,0.80), 0 8px 24px rgba(0,4,20,0.55), inset 0 1px 0 rgba(255,255,255,0.22)',
-        overflow: 'hidden',
+        flexShrink: 0,
       }}
     >
-      {/* Top-left specular */}
-      <div style={{ position: 'absolute', inset: 0, borderRadius: 20, background: 'linear-gradient(145deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.06) 35%, transparent 60%)' }} />
-      {/* Edge catch-light — left for left-side cards, right for right-side */}
-      {side === 'left' ? (
-        <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '20%', background: 'linear-gradient(to right, rgba(255,255,255,0.20) 0%, transparent 100%)' }} />
-      ) : (
-        <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '20%', background: 'linear-gradient(to left, rgba(255,255,255,0.20) 0%, transparent 100%)' }} />
-      )}
-      {/* Bottom depth fade */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%', borderRadius: '0 0 20px 20px', background: 'linear-gradient(to top, rgba(4,12,40,0.65) 0%, transparent 100%)' }} />
-      {/* Outer rim */}
-      <div style={{ position: 'absolute', inset: 0, borderRadius: 20, border: '1px solid rgba(255,255,255,0.28)' }} />
+      {/* Inner top highlight */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '38%', borderRadius: '22px 22px 0 0', background: 'linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 100%)' }} />
+      {/* Bottom dark gradient */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', borderRadius: '0 0 22px 22px', background: 'linear-gradient(0deg, rgba(20,30,55,0.70) 0%, transparent 100%)' }} />
+      {/* Blue edge glow */}
+      <div style={{ position: 'absolute', inset: 0, borderRadius: 22, boxShadow: 'inset 0 0 18px rgba(0,120,255,0.18)' }} />
+      {/* Floor reflection */}
+      <div style={{
+        position: 'absolute',
+        bottom: -50,
+        left: '10%',
+        width: '80%',
+        height: 70,
+        background: 'rgba(255,255,255,0.22)',
+        filter: 'blur(22px)',
+        transform: 'scaleY(0.35)',
+        pointerEvents: 'none',
+      }} />
     </motion.div>
   );
 }
@@ -88,60 +93,69 @@ export default function HeroSection() {
         {/* Dark scrim — preserves light beams, improves text legibility */}
         <div className="absolute inset-0" style={{ background: 'rgba(2,8,28,0.32)' }} />
 
-        {/* ═══════════════════════════════════════════════
+        {/* ════════════════════════════════════════════
             LEFT CARD GROUP
-            3 cards overlapping, fanning toward center.
-            Positioned using absolute coords so they truly
-            overlap and sit anchored at the bottom.
-        ════════════════════════════════════════════════ */}
+            Perspective container at left:4%, vertically
+            centered. Three cards fan inward via rotateY.
+        ════════════════════════════════════════════ */}
+        <div style={{
+          position: 'absolute',
+          left: '4%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: -20,
+          perspective: 1400,
+          zIndex: 5,
+        }}>
+          {/* card-1: furthest back */}
+          <HeroCard
+            cardTransform="translateX(40px) scale(0.88) rotateY(34deg)"
+            zIndex={1} opacity={0.75} delay={0.1} initX={-140}
+          />
+          {/* card-2: middle */}
+          <HeroCard
+            cardTransform="translateX(15px) scale(0.96) rotateY(24deg)"
+            zIndex={2} opacity={0.9} delay={0.22} initX={-100}
+          />
+          {/* card-3: closest */}
+          <HeroCard
+            cardTransform="translateX(-10px) scale(1.05) rotateY(14deg)"
+            zIndex={3} delay={0.36} initX={-70}
+          />
+        </div>
 
-        {/* Card A — outermost / furthest back */}
-        <PanelCard
-          width={140} height={310}
-          rotate={-18}
-          left={20} bottom={60}
-          opacity={0.45} zIndex={2} delay={0.1} initX={-120} side="left"
-        />
-        {/* Card B — middle */}
-        <PanelCard
-          width={162} height={355}
-          rotate={-9}
-          left={80} bottom={60}
-          opacity={0.70} zIndex={3} delay={0.22} initX={-90} side="left"
-        />
-        {/* Card C — front / closest to camera */}
-        <PanelCard
-          width={184} height={400}
-          rotate={-2}
-          left={162} bottom={60}
-          opacity={0.95} zIndex={4} delay={0.36} initX={-60} side="left"
-        />
-
-        {/* ═══════════════════════════════════════════════
-            RIGHT CARD GROUP — mirror of left
-        ════════════════════════════════════════════════ */}
-
-        {/* Card C — front / closest */}
-        <PanelCard
-          width={184} height={400}
-          rotate={2}
-          right={162} bottom={60}
-          opacity={0.95} zIndex={4} delay={0.36} initX={60} side="right"
-        />
-        {/* Card B — middle */}
-        <PanelCard
-          width={162} height={355}
-          rotate={9}
-          right={80} bottom={60}
-          opacity={0.70} zIndex={3} delay={0.22} initX={90} side="right"
-        />
-        {/* Card A — outermost / furthest back */}
-        <PanelCard
-          width={140} height={310}
-          rotate={18}
-          right={20} bottom={60}
-          opacity={0.45} zIndex={2} delay={0.1} initX={120} side="right"
-        />
+        {/* ════════════════════════════════════════════
+            RIGHT CARD GROUP — mirror
+        ════════════════════════════════════════════ */}
+        <div style={{
+          position: 'absolute',
+          right: '4%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: -20,
+          perspective: 1400,
+          zIndex: 5,
+        }}>
+          {/* card-1: closest */}
+          <HeroCard
+            cardTransform="translateX(10px) scale(1.05) rotateY(-14deg)"
+            zIndex={3} delay={0.36} initX={70}
+          />
+          {/* card-2: middle */}
+          <HeroCard
+            cardTransform="translateX(-15px) scale(0.96) rotateY(-24deg)"
+            zIndex={2} opacity={0.9} delay={0.22} initX={100}
+          />
+          {/* card-3: furthest back */}
+          <HeroCard
+            cardTransform="translateX(-40px) scale(0.88) rotateY(-34deg)"
+            zIndex={1} opacity={0.75} delay={0.1} initX={140}
+          />
+        </div>
 
         {/* ── CENTER CONTENT ── */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">

@@ -54,7 +54,6 @@ export default function Navbar() {
     { label: 'Responsabilité Sociétale', href: `/${locale}/csr/` },
     { label: 'Carrières', href: `/${locale}/career/` },
     { label: 'Actualités', href: `/${locale}/events-news/` },
-    { label: 'Contact', href: `/${locale}/contact/` },
   ];
 
   const socialLinks = [
@@ -129,13 +128,48 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* ── COL 3: Language + Social — fixed width, flush right ── */}
+          {/* ── COL 3: Lang → Contact CTA → Social ── */}
           <div
             className="hidden xl:flex items-center justify-end"
-            style={{ minWidth: 200, gap: 6 }}
+            style={{ minWidth: 260, gap: 8 }}
           >
+            {/* Language selector — pale red style */}
             <LanguageSwitch />
-            <div style={{ width: 1, height: 18, background: '#d1d5db', margin: '0 6px' }} />
+
+            {/* Contact CTA button */}
+            <Link
+              href={`/${locale}/contact/`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '8px 18px',
+                background: '#e41e1e',
+                color: '#fff',
+                fontSize: 13,
+                fontWeight: 700,
+                letterSpacing: '0.04em',
+                borderRadius: 6,
+                whiteSpace: 'nowrap',
+                boxShadow: '0 2px 12px rgba(228,30,30,0.28)',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background = '#c41616';
+                (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 18px rgba(228,30,30,0.42)';
+                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background = '#e41e1e';
+                (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 12px rgba(228,30,30,0.28)';
+                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+              }}
+            >
+              Contact
+            </Link>
+
+            <div style={{ width: 1, height: 18, background: '#d1d5db', margin: '0 2px' }} />
+
+            {/* Social icons */}
             {socialLinks.map((s) => (
               <a
                 key={s.label}

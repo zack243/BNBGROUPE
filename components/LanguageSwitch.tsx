@@ -46,18 +46,18 @@ export default function LanguageSwitch({ className }: LanguageSwitchProps) {
         disabled={isPending}
         className="flex items-center gap-1.5 transition-colors"
         style={{
-          padding: '6px 10px',
+          padding: '6px 12px',
           borderRadius: 6,
-          border: '1px solid #e5e7eb',
-          background: 'white',
-          color: '#1a2340',
+          border: '1px solid rgba(228,30,30,0.35)',
+          background: 'rgba(228,30,30,0.06)',
+          color: '#e41e1e',
           fontSize: 13,
           fontWeight: 600,
           cursor: 'pointer',
           letterSpacing: '0.04em',
         }}
       >
-        <Globe className="w-3.5 h-3.5" style={{ color: '#6b7280' }} />
+        <Globe className="w-3.5 h-3.5" style={{ color: '#e41e1e' }} />
         <span style={{ textTransform: 'uppercase' }}>{locale}</span>
         <ChevronDown
           className="w-3 h-3"

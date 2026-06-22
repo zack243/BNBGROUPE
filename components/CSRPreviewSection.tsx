@@ -3,40 +3,26 @@
 import { motion } from 'framer-motion';
 import { useLocale } from '@/lib/i18n-context';
 import Link from 'next/link';
-import { ArrowRight, Heart, GraduationCap, Users, Leaf } from 'lucide-react';
+import { ArrowRight, Quote } from 'lucide-react';
 
-const CSR_CARDS = [
+const TESTIMONIALS = [
   {
-    title: 'Éducation',
-    description: 'Réhabilitation des écoles, fournitures scolaires, bourses d\'études pour les jeunes Africains.',
-    image: '/images/bnb/social/social1.jpg',
-    icon: GraduationCap,
-    accent: '#e41e1e',
-    accentLight: '#fef2f2',
+    quote: "Grâce au soutien de BNB Groupe, notre école a pu réhabiliter ses salles de classe et offrir des fournitures à plus de 300 élèves. Cet investissement dans l'éducation change réellement des vies.",
+    name: 'Marie-Claire Mulamba',
+    role: 'Directrice d\'école — Kinshasa',
+    category: 'Community Impact',
   },
   {
-    title: 'Santé & Bien-être',
-    description: 'Campagnes de don de sang, chirurgies gratuites, soutien aux structures de santé locales.',
-    image: '/images/bnb/social/social2.jpg',
-    icon: Heart,
-    accent: '#16a34a',
-    accentLight: '#f0fdf4',
+    quote: "Les campagnes de santé organisées par BNB Groupe ont permis à des milliers de familles d'accéder à des soins médicaux gratuits. Leur engagement pour la santé communautaire est exemplaire.",
+    name: 'Dr. Jean-Baptiste Kanda',
+    role: 'Médecin — Centre de santé de Lubumbashi',
+    category: 'Education Support',
   },
   {
-    title: 'Environnement',
-    description: 'Initiatives de reboisement, sensibilisation écologique et développement durable.',
-    image: '/images/bnb/social/social4.jpg',
-    icon: Leaf,
-    accent: '#0ea5e9',
-    accentLight: '#f0f9ff',
-  },
-  {
-    title: 'Développement Communautaire',
-    description: 'Distribution alimentaire, aide aux personnes vulnérables et soutien aux communautés.',
-    image: '/images/bnb/social/social3.jpg',
-    icon: Users,
-    accent: '#f97316',
-    accentLight: '#fff7ed',
+    quote: "BNB Groupe ne se contente pas de distribuer des produits. Leur vision du développement social et économique de l'Afrique nous inspire et renforce notre confiance en l'avenir.",
+    name: 'Samuel Ilunga',
+    role: 'Coordinateur ONG — Développement local',
+    category: 'Social Development',
   },
 ];
 
@@ -145,7 +131,7 @@ export default function CSRPreviewSection() {
                 position: 'relative',
               }}>
                 <img
-                  src="/images/bnb/social/social3.jpg"
+                  src="/images/bnb/social/social1.jpg"
                   alt="Responsabilité Sociétale BNB"
                   style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
                 />
@@ -159,91 +145,107 @@ export default function CSRPreviewSection() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          CSR CARDS — 4 axes d'action
+          TESTIMONIALS
       ═══════════════════════════════════════════ */}
-      <section style={{ background: '#fff', padding: '72px 0 88px' }}>
+      <section style={{ background: '#fafafa', padding: '80px 0 96px', borderTop: '1px solid #f0f0f0' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px' }}>
 
           {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: 52 }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
               <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
               <span style={{ color: '#e41e1e', fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
-                Nos Axes d&apos;Action
+                Témoignages
               </span>
               <div style={{ width: 28, height: 2, background: '#e41e1e' }} />
             </div>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)', fontWeight: 800, color: '#1a2340' }}>
-              Agir aujourd&apos;hui pour un impact durable
+            <h2 style={{ fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)', fontWeight: 800, color: '#1a2340', marginBottom: 12 }}>
+              Ils témoignent de notre impact
             </h2>
+            <p style={{ color: '#6b7280', fontSize: 15, maxWidth: 480, margin: '0 auto', lineHeight: 1.65 }}>
+              Des partenaires et bénéficiaires partagent leur expérience avec BNB Groupe.
+            </p>
           </div>
 
-          {/* 4 cards grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
-            {CSR_CARDS.map((card, i) => {
-              const Icon = card.icon;
-              return (
-                <motion.div
-                  key={card.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  style={{
-                    background: '#fff',
-                    borderRadius: 16,
-                    overflow: 'visible',
-                    boxShadow: '0 2px 16px rgba(0,0,0,0.07)',
-                    border: '1px solid #f0f0f0',
-                    transition: 'all 0.25s ease',
-                    cursor: 'default',
-                  }}
-                  whileHover={{
-                    y: -6,
-                    boxShadow: '0 16px 48px rgba(0,0,0,0.12)',
-                  }}
-                >
-                  {/* Image + icon badge */}
-                  <div style={{ position: 'relative', borderRadius: '16px 16px 0 0', overflow: 'hidden' }}>
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      style={{ width: '100%', height: 180, objectFit: 'cover', display: 'block' }}
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 60%)', pointerEvents: 'none' }} />
-                    {/* Icon badge */}
-                    <div style={{
-                      position: 'absolute', bottom: -18, left: 20,
-                      width: 44, height: 44, borderRadius: 12,
-                      background: card.accent,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      boxShadow: `0 4px 16px ${card.accent}55`,
-                      border: '3px solid #fff',
-                    }}>
-                      <Icon style={{ width: 20, height: 20, color: '#fff' }} />
+          {/* 3 testimonial cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
+            {TESTIMONIALS.map((t, i) => (
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                style={{
+                  background: '#fff',
+                  borderRadius: 20,
+                  padding: '36px 32px 32px',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
+                  border: '1px solid #f0f0f0',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 0,
+                  transition: 'all 0.25s ease',
+                  borderTop: '4px solid #e41e1e',
+                }}
+                whileHover={{ y: -6, boxShadow: '0 16px 48px rgba(0,0,0,0.11)' }}
+              >
+                {/* Quote icon */}
+                <div style={{
+                  width: 44, height: 44, borderRadius: 12,
+                  background: 'linear-gradient(135deg, #e41e1e 0%, #c41616 100%)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: 24,
+                  boxShadow: '0 4px 14px rgba(228,30,30,0.28)',
+                }}>
+                  <Quote style={{ width: 20, height: 20, color: '#fff' }} />
+                </div>
+
+                {/* Category pill */}
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  background: '#fef2f2', color: '#e41e1e',
+                  fontSize: 10, fontWeight: 700, letterSpacing: '0.14em',
+                  textTransform: 'uppercase', padding: '4px 12px', borderRadius: 20,
+                  marginBottom: 18, width: 'fit-content',
+                }}>
+                  {t.category}
+                </div>
+
+                {/* Quote text */}
+                <p style={{
+                  fontSize: 14.5, color: '#374151', lineHeight: 1.75,
+                  fontStyle: 'italic', flexGrow: 1, marginBottom: 28,
+                }}>
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+
+                {/* Divider */}
+                <div style={{ width: '100%', height: 1, background: '#f0f0f0', marginBottom: 20 }} />
+
+                {/* Author */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div style={{
+                    width: 44, height: 44, borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #1a2340 0%, #2d3a5e 100%)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <span style={{ color: '#fff', fontSize: 16, fontWeight: 700 }}>
+                      {t.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: '#1a2340', lineHeight: 1.2 }}>
+                      {t.name}
+                    </div>
+                    <div style={{ fontSize: 12.5, color: '#9ca3af', marginTop: 2, lineHeight: 1.3 }}>
+                      {t.role}
                     </div>
                   </div>
-
-                  {/* Text */}
-                  <div style={{ padding: '32px 20px 24px' }}>
-                    <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a2340', marginBottom: 8 }}>
-                      {card.title}
-                    </h3>
-                    <p style={{ fontSize: 13.5, color: '#6b7280', lineHeight: 1.65, marginBottom: 18 }}>
-                      {card.description}
-                    </p>
-                    <Link
-                      href={`/${locale}/csr/`}
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 13, fontWeight: 600, color: card.accent, textDecoration: 'none', transition: 'gap 0.2s' }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '8px'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '4px'; }}
-                    >
-                      En savoir plus <ArrowRight style={{ width: 13, height: 13 }} />
-                    </Link>
-                  </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </motion.div>
+            ))}
           </div>
 
         </div>

@@ -44,29 +44,29 @@ export default function HeroSection() {
         {/* Dark scrim — preserves light beams, improves text legibility */}
         <div className="absolute inset-0" style={{ background: 'rgba(2,8,28,0.32)' }} />
 
-        {/* ── LEFT CARD GROUP — Calcident · Bon Appétit · Bon Déjeuner ── */}
+        {/* ── LEFT CARD GROUP ── */}
         <div className="hero-card-group hero-card-left">
           <div className="hero-card card-back">
-            <img src="/images/bnb/hero/bondejeuner.png" alt="Bon Déjeuner" className="hero-card-img" />
+            <img src="/images/bnb/hero/card3.png" alt="Brand 3" className="hero-card-img" />
           </div>
           <div className="hero-card card-mid">
-            <img src="/images/bnb/hero/bonappetit.png" alt="Bon Appétit" className="hero-card-img" />
+            <img src="/images/bnb/hero/card2.png" alt="Brand 2" className="hero-card-img" />
           </div>
           <div className="hero-card card-front">
-            <img src="/images/bnb/hero/calcident.png" alt="Calcident" className="hero-card-img" />
+            <img src="/images/bnb/hero/card1.png" alt="Brand 1" className="hero-card-img" />
           </div>
         </div>
 
-        {/* ── RIGHT CARD GROUP — Bom Dia · Simba · Volcan ── */}
+        {/* ── RIGHT CARD GROUP ── */}
         <div className="hero-card-group hero-card-right">
           <div className="hero-card card-front">
-            <img src="/images/bnb/hero/bomdia.png" alt="Bom Dia" className="hero-card-img" />
+            <img src="/images/bnb/hero/card4.png" alt="Brand 4" className="hero-card-img" />
           </div>
           <div className="hero-card card-mid">
-            <img src="/images/bnb/hero/simba.png" alt="Simba" className="hero-card-img" />
+            <img src="/images/bnb/hero/card5.png" alt="Brand 5" className="hero-card-img" />
           </div>
           <div className="hero-card card-back">
-            <img src="/images/bnb/hero/volcan.png" alt="Volcan" className="hero-card-img" />
+            <img src="/images/bnb/hero/card6.png" alt="Brand 6" className="hero-card-img" />
           </div>
         </div>
 

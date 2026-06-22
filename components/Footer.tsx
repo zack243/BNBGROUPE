@@ -112,8 +112,19 @@ export default function Footer() {
       </div>
 
       {/* ── MAIN FOOTER ── */}
-      <div style={{ background: 'linear-gradient(160deg, #1a3a8f 0%, #1e3fa0 50%, #1a3585 100%)', padding: '56px 0 40px' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px' }}>
+      <div style={{ position: 'relative', padding: '56px 0 40px', overflow: 'hidden' }}>
+        {/* Hero-style background */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: 'url(/images/bnb/hero/hero-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0,
+        }} />
+        {/* Deep blue overlay — keeps BNB identity + readability */}
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(15,28,80,0.88)', zIndex: 1 }} />
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 2 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1.3fr', gap: 56 }}>
 
             {/* COL 1 — Brand */}

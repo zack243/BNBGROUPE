@@ -113,7 +113,7 @@ export default function AboutSection() {
             >
               <div className="about-mosaic-single">
                 <img
-                  src="/images/bnb/about/about-office.jpg"
+                  src="/images/bnb/local bnb.png"
                   alt="BNB Groupe — bureaux et siège"
                 />
               </div>

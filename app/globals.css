@@ -97,7 +97,7 @@
 
 .hero-card {
   position: relative;
-  width: 165px;
+  width: 195px;
   height: 490px;
   margin-right: -28px;
   border-radius: 22px;
@@ -174,7 +174,7 @@
 
 @media (max-width: 1024px) {
   .hero-card {
-    width: 110px;
+    width: 130px;
     height: 330px;
   }
 }

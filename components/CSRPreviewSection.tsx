@@ -53,13 +53,13 @@ export default function CSRPreviewSection() {
           position: 'relative',
           overflow: 'hidden',
           padding: '88px 0 80px',
-          background: 'linear-gradient(135deg, #fff8f4 0%, #fef3ec 30%, #f0f7ff 70%, #edf4ff 100%)',
+          background: 'linear-gradient(135deg, #fff3f3 0%, #fff8f4 40%, #f5f9ff 80%, #edf4ff 100%)',
         }}
       >
         {/* Decorative blobs */}
-        <div style={{ position: 'absolute', top: -80, right: -80, width: 420, height: 420, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -60, left: -60, width: 360, height: 360, borderRadius: '50%', background: 'radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: '40%', left: '38%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(249,115,22,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: -80, right: -80, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.11) 0%, transparent 65%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -60, left: -60, width: 360, height: 360, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '30%', right: '35%', width: 260, height: 260, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.04) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 64 }}>

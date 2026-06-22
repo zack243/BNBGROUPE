@@ -66,19 +66,19 @@ export default function Footer() {
     <footer>
       {/* ── CTA BANNER ── */}
       <div style={{
-        background: 'linear-gradient(135deg, #f0f7ff 0%, #fff8f4 60%, #fef3ec 100%)',
-        borderTop: '1px solid #e8edf5',
+        background: 'linear-gradient(135deg, #e41e1e 0%, #c41616 100%)',
         padding: '44px 0',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', top: -60, right: -60, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: -60, right: -60, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
           <div>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2rem)', fontWeight: 800, color: '#1a2340', lineHeight: 1.2, marginBottom: 10 }}>
-              Construisons l&apos;avenir <span style={{ color: '#e41e1e' }}>ensemble.</span>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2rem)', fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 10 }}>
+              Construisons l&apos;avenir <span style={{ color: 'rgba(255,255,255,0.85)' }}>ensemble.</span>
             </h2>
-            <p style={{ color: '#4b5563', fontSize: 15, lineHeight: 1.65, maxWidth: 480 }}>
+            <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: 15, lineHeight: 1.65, maxWidth: 480 }}>
               Découvrez les marques et solutions qui améliorent le quotidien<br />
               de millions de personnes.
             </p>
@@ -87,21 +87,23 @@ export default function Footer() {
             href={`/${locale}/contact/`}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 10,
-              background: '#e41e1e', color: '#fff',
+              background: '#fff', color: '#e41e1e',
               fontWeight: 700, fontSize: 15, padding: '15px 32px',
               borderRadius: 6, whiteSpace: 'nowrap', flexShrink: 0,
-              boxShadow: '0 4px 20px rgba(228,30,30,0.28)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.18)',
               transition: 'all 0.22s ease', textDecoration: 'none',
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = '#c41616';
+              el.style.background = '#fef2f2';
               el.style.transform = 'translateY(-2px)';
+              el.style.boxShadow = '0 8px 28px rgba(0,0,0,0.22)';
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = '#e41e1e';
+              el.style.background = '#fff';
               el.style.transform = 'translateY(0)';
+              el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.18)';
             }}
           >
             Nous contacter <ArrowRight style={{ width: 18, height: 18 }} />
@@ -109,10 +111,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── MAIN DARK FOOTER ── */}
-      <div style={{ background: '#0f2356', padding: '56px 0 40px' }}>
+      {/* ── MAIN FOOTER ── */}
+      <div style={{ background: 'linear-gradient(160deg, #1a3a8f 0%, #1e3fa0 50%, #1a3585 100%)', padding: '56px 0 40px' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1.3fr', gap: 48 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1.3fr', gap: 56 }}>
 
             {/* COL 1 — Brand */}
             <div>
@@ -178,27 +180,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* COL 3 — Nos Marques */}
-            <div>
-              <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
-                Nos Marques
-              </h4>
-              <div style={{ width: 28, height: 2, background: '#e41e1e', marginBottom: 20 }} />
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {BRAND_LOGOS.map((brand) => (
-                  <li key={brand.name} style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: 12 }}>
-                    <Link href={`/${locale}/focus-brand/`} style={{ display: 'inline-block', textDecoration: 'none', transition: 'opacity 0.2s' }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.8'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
-                    >
-                      <img src={brand.src} alt={brand.name} style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* COL 4 — Contact */}
+            {/* COL 3 — Contact */}
             <div>
               <h4 style={{ color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
                 Contact
@@ -234,7 +216,7 @@ export default function Footer() {
       </div>
 
       {/* ── COPYRIGHT BAR ── */}
-      <div style={{ background: '#0a1d47', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '14px 0' }}>
+      <div style={{ background: '#132f7a', borderTop: '1px solid rgba(255,255,255,0.10)', padding: '14px 0' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>
             © {year} BNB Groupe. Tous droits réservés.

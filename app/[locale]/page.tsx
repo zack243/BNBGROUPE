@@ -26,9 +26,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <AboutSection />
-      <CSRPreviewSection />
       <CategoriesSection />
       <ProductsSection />
+      <CSRPreviewSection />
     </>
   );
 }

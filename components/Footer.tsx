@@ -116,8 +116,8 @@ export default function Footer() {
 
             {/* COL 1 — Brand */}
             <div>
-              <Link href={`/${locale}/`} style={{ display: 'inline-block', marginBottom: 20 }}>
-                <img src="/images/bnb/logo/logo bnb.avif" alt="BNB Groupe" style={{ height: 52, width: 'auto', filter: 'brightness(0) invert(1)' }} />
+              <Link href={`/${locale}/`} style={{ display: 'inline-block', marginBottom: 20, textDecoration: 'none' }}>
+                <span style={{ fontSize: 28, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>BNB Groupe</span>
               </Link>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13.5, lineHeight: 1.75, marginBottom: 24, maxWidth: 260 }}>
                 BNB Groupe est un groupe panafricain spécialisé dans le développement,
@@ -191,7 +191,7 @@ export default function Footer() {
                       onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.8'; }}
                       onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
                     >
-                      <img src={brand.src} alt={brand.name} style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
+                      <img src={brand.src} alt={brand.name} style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
                     </Link>
                   </li>
                 ))}
@@ -230,20 +230,6 @@ export default function Footer() {
             </div>
 
           </div>
-        </div>
-      </div>
-
-      {/* ── BOTTOM BRAND STRIP ── */}
-      <div style={{ background: '#0a1d47', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '20px 0' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', gap: 32, overflowX: 'auto' }}>
-          {BRAND_LOGOS.map((brand) => (
-            <Link key={brand.name} href={`/${locale}/focus-brand/`} style={{ flexShrink: 0, opacity: 0.75, transition: 'opacity 0.2s', textDecoration: 'none' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.75'; }}
-            >
-              <img src={brand.src} alt={brand.name} style={{ height: 32, width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
-            </Link>
-          ))}
         </div>
       </div>
 

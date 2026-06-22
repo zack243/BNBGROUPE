@@ -20,7 +20,7 @@ export default function AboutSection() {
   const locale = useLocale();
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const doubled = [...BRANDS, ...BRANDS];
+  const tripled = [...BRANDS, ...BRANDS, ...BRANDS];
 
   return (
     <>
@@ -144,7 +144,7 @@ export default function AboutSection() {
         {/* Carousel track */}
         <div className="brands-carousel-outer">
           <div className="brands-carousel-track" ref={trackRef}>
-            {doubled.map((brand, i) => (
+            {tripled.map((brand: { name: string; src: string }, i: number) => (
               <div key={i} className="brands-carousel-item">
                 <img src={brand.src} alt={brand.name} />
               </div>

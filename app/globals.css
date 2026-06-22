@@ -147,19 +147,18 @@
   width: auto;
   max-width: 130px;
   object-fit: contain;
-  filter: grayscale(1) opacity(0.55);
-  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: none;
+  transition: transform 0.3s ease;
   display: block;
 }
 
 .brands-carousel-item:hover img {
-  filter: grayscale(0) opacity(1);
   transform: scale(1.08);
 }
 
 @keyframes brands-scroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-33.333%); }
 }
 
 /* ── Hero card groups ── */

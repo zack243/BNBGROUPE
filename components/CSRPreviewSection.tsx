@@ -53,15 +53,24 @@ export default function CSRPreviewSection() {
           position: 'relative',
           overflow: 'hidden',
           padding: '88px 0 80px',
-          background: 'linear-gradient(135deg, #fff3f3 0%, #fff8f4 40%, #f5f9ff 80%, #edf4ff 100%)',
         }}
       >
-        {/* Decorative blobs */}
-        <div style={{ position: 'absolute', top: -80, right: -80, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.11) 0%, transparent 65%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -60, left: -60, width: 360, height: 360, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: '30%', right: '35%', width: 260, height: 260, borderRadius: '50%', background: 'radial-gradient(circle, rgba(228,30,30,0.04) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        {/* Background image */}
+        <img
+          src="/images/bnb/bg-csr.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center',
+            zIndex: 0, pointerEvents: 'none', display: 'block',
+          }}
+        />
+        {/* Very light overlay for text readability */}
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.18)', zIndex: 1, pointerEvents: 'none' }} />
 
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 2 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 64 }}>
 
             {/* LEFT 40% */}

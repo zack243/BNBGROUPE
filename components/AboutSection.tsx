@@ -29,9 +29,23 @@ export default function AboutSection() {
       ═══════════════════════════════════════════ */}
       <section
         className="w-full"
-        style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #ffffff 100%)', padding: '80px 0 60px' }}
+        style={{ position: 'relative', overflow: 'hidden', padding: '80px 0 60px' }}
       >
-        <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0 40px' }}>
+        {/* Background image */}
+        <img
+          src="/images/bnb/bg-about.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center',
+            zIndex: 0, pointerEvents: 'none', display: 'block',
+          }}
+        />
+        {/* Subtle overlay for text readability */}
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.30)', zIndex: 1, pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 2 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 56 }}>
 
             {/* ── LEFT: 38% ── */}

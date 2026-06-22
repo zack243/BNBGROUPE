@@ -52,36 +52,19 @@ export default function CategoriesSection() {
       padding: '80px 0 88px',
       overflow: 'hidden',
     }}>
-      {/* Background: CSS recreation of the provided light-blue wave image */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(160deg, #eaf3fb 0%, #f5f9fe 35%, #ffffff 60%, #f0f5fb 100%)',
-        zIndex: 0,
-      }} />
-      {/* Top-left arc */}
-      <div style={{
-        position: 'absolute', top: -120, left: -120,
-        width: 480, height: 480, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(180,210,240,0.55) 0%, transparent 65%)',
-        zIndex: 0, pointerEvents: 'none',
-      }} />
-      {/* Top-right arc */}
-      <div style={{
-        position: 'absolute', top: -80, right: -80,
-        width: 380, height: 380, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(180,210,240,0.40) 0%, transparent 65%)',
-        zIndex: 0, pointerEvents: 'none',
-      }} />
-      {/* Bottom dark navy bar */}
-      <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0,
-        height: 14, background: '#0f2356', zIndex: 0,
-      }} />
-      {/* Bottom red accent */}
-      <div style={{
-        position: 'absolute', bottom: 14, left: 0, right: 0,
-        height: 7, background: '#e41e1e', zIndex: 0,
-      }} />
+      {/* Background image — full cover */}
+      <img
+        src="/images/bnb/bg-categories.png"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover', objectPosition: 'center',
+          zIndex: 0, pointerEvents: 'none',
+          display: 'block',
+        }}
+      />
 
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 

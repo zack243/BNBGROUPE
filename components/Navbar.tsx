@@ -70,7 +70,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm"
         style={{ height: 72 }}
       >
-        <div className="max-w-[1280px] mx-auto px-4 h-full flex items-center justify-between">
+        <div className="max-w-[1380px] mx-auto px-8 h-full flex items-center justify-between">
 
           {/* Logo */}
           <Link href={`/${locale}/`} className="flex-shrink-0 flex items-center">
@@ -82,14 +82,14 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center">
+          <nav className="hidden xl:flex items-center" style={{ gap: 4 }}>
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href.replace(/\/$/, ''));
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative px-4 py-2 text-sm font-medium transition-colors"
+                  className="relative px-5 py-2 text-sm font-medium transition-colors"
                   style={{
                     color: isActive ? '#e41e1e' : '#1a2340',
                     whiteSpace: 'nowrap',
@@ -118,7 +118,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Language + Social */}
-          <div className="hidden xl:flex items-center gap-2">
+          <div className="hidden xl:flex items-center gap-3">
             <LanguageSwitch />
             <div style={{ width: 1, height: 20, background: '#e5e7eb', margin: '0 8px' }} />
             <div className="flex items-center gap-1">

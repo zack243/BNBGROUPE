@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLocale } from '@/lib/i18n-context';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -22,148 +22,123 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, [activeSlide, goTo]);
 
+  /* ── card helper ── */
+  const Card = ({ w, h, rotate, tx, ty, opacity, zIndex, delay, shadow, initX }: {
+    w: number; h: number; rotate: number; tx: number; ty: number;
+    opacity: number; zIndex: number; delay: number; shadow: string; initX: number;
+  }) => (
+    <motion.div
+      initial={{ opacity: 0, x: initX }}
+      animate={{ opacity, x: 0 }}
+      transition={{ delay, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        width: w,
+        height: h,
+        borderRadius: 18,
+        background: 'linear-gradient(175deg, #d0d8e8 0%, #a8b8cc 25%, #8898ae 55%, #6a7a90 80%, #586070 100%)',
+        boxShadow: shadow,
+        transform: `rotate(${rotate}deg) translate(${tx}px, ${ty}px)`,
+        zIndex,
+        overflow: 'hidden',
+      }}
+    >
+      {/* Top specular highlight */}
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(170deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 40%, transparent 70%)', borderRadius: 18 }} />
+      {/* Left edge glow */}
+      <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '22%', background: 'linear-gradient(to right, rgba(255,255,255,0.18) 0%, transparent 100%)' }} />
+      {/* Bottom fade */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(0,10,40,0.55) 0%, transparent 100%)', borderRadius: '0 0 18px 18px' }} />
+      {/* Outer border */}
+      <div style={{ position: 'absolute', inset: 0, borderRadius: 18, border: '1px solid rgba(255,255,255,0.35)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)' }} />
+    </motion.div>
+  );
+
   return (
     <div className="w-full">
       {/* ── HERO ── */}
       <section
         className="relative w-full overflow-hidden"
-        style={{ height: '78vh', minHeight: 480 }}
+        style={{ height: '78vh', minHeight: 520 }}
       >
-        {/* ── BACKGROUND LAYERS ── */}
-
-        {/* Base: deep navy */}
-        <div className="absolute inset-0" style={{ background: '#04102a' }} />
-
-        {/* Mid-blue radial glow behind centre */}
+        {/* ── BACKGROUND IMAGE ── */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              'radial-gradient(ellipse 60% 70% at 50% 45%, rgba(14,52,140,0.9) 0%, rgba(6,18,55,0.4) 55%, transparent 80%)',
+            backgroundImage: 'url(/images/bnb/hero/hero-bg.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
           }}
         />
 
-        {/* Top-left light beam — wide fan from upper-left corner */}
+        {/* Thin dark overlay to deepen contrast and help text legibility */}
         <div
-          className="absolute"
-          style={{
-            top: 0, left: 0,
-            width: '52%', height: '100%',
-            background:
-              'linear-gradient(115deg, rgba(40,100,220,0.22) 0%, rgba(20,60,160,0.12) 30%, transparent 65%)',
-            filter: 'blur(18px)',
-          }}
+          className="absolute inset-0"
+          style={{ background: 'rgba(2,8,28,0.38)' }}
         />
 
-        {/* Top-right subtle glow */}
+        {/* Centre spotlight — lifts the glow behind text */}
         <div
           className="absolute"
           style={{
-            top: 0, right: 0,
-            width: '48%', height: '85%',
-            background:
-              'linear-gradient(245deg, rgba(40,90,200,0.16) 0%, rgba(15,50,130,0.08) 35%, transparent 65%)',
-            filter: 'blur(24px)',
-          }}
-        />
-
-        {/* Bright centre spotlight — narrow vertical beam */}
-        <div
-          className="absolute"
-          style={{
-            top: '-5%', left: '50%',
+            top: '10%', left: '50%',
             transform: 'translateX(-50%)',
-            width: '38%', height: '75%',
-            background:
-              'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(60,120,255,0.15) 0%, transparent 70%)',
-            filter: 'blur(8px)',
+            width: '44%', height: '65%',
+            background: 'radial-gradient(ellipse 55% 70% at 50% 20%, rgba(40,100,255,0.18) 0%, transparent 70%)',
+            filter: 'blur(6px)',
+            pointerEvents: 'none',
           }}
         />
 
-        {/* Floor reflection — bright streak on the ground */}
-        <div
-          className="absolute bottom-0 left-0 right-0"
-          style={{
-            height: '28%',
-            background:
-              'linear-gradient(to top, rgba(15,40,120,0.65) 0%, rgba(10,28,90,0.3) 50%, transparent 100%)',
-          }}
-        />
-
-        {/* Horizontal ground line glow */}
-        <div
-          className="absolute left-0 right-0"
-          style={{
-            bottom: '26%',
-            height: '1px',
-            background:
-              'linear-gradient(to right, transparent 0%, rgba(60,120,255,0.25) 25%, rgba(100,160,255,0.4) 50%, rgba(60,120,255,0.25) 75%, transparent 100%)',
-          }}
-        />
-
-        {/* Fog / atmosphere at horizon */}
-        <div
-          className="absolute left-0 right-0"
-          style={{
-            bottom: '20%',
-            height: '18%',
-            background:
-              'radial-gradient(ellipse 80% 100% at 50% 100%, rgba(20,55,160,0.28) 0%, transparent 70%)',
-            filter: 'blur(12px)',
-          }}
-        />
-
-        {/* ── LEFT CARDS — overlapping fan, largest closest to center ── */}
+        {/* ── LEFT CARDS ── */}
+        {/* Container anchored bottom-left so cards sit on the floor */}
         <div
           className="absolute"
           style={{
             left: 0,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '26vw',
-            minWidth: 200,
-            maxWidth: 340,
-            height: '70%',
-            perspective: 1200,
+            bottom: '8%',
+            width: '30vw',
+            minWidth: 220,
+            maxWidth: 380,
+            height: '72%',
           }}
         >
-          {[
-            /* outermost: small, heavy rotate, far back */
-            { widthPct: 58, heightPct: 72, rotateY: 48, rotateZ: -8, translateX: '-10%', translateY: '8%', translateZ: -180, opacity: 0.38, zIndex: 1 },
-            /* middle */
-            { widthPct: 72, heightPct: 86, rotateY: 28, rotateZ: -4, translateX: '12%', translateY: '3%', translateZ: -80, opacity: 0.62, zIndex: 2 },
-            /* front: largest, least rotated */
-            { widthPct: 88, heightPct: 100, rotateY: 10, rotateZ: -1, translateX: '30%', translateY: '0%', translateZ: 0, opacity: 0.90, zIndex: 3 },
-          ].map((card, i) => (
-            <motion.div
-              key={`left-${i}`}
-              initial={{ opacity: 0, x: -80 }}
-              animate={{ opacity: card.opacity, x: 0 }}
-              transition={{ delay: 0.2 + i * 0.14, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-              style={{
-                position: 'absolute',
-                width: `${card.widthPct}%`,
-                height: `${card.heightPct}%`,
-                top: '50%',
-                left: 0,
-                transform: `translateY(-50%) translateX(${card.translateX}) translateY(${card.translateY}) perspective(1200px) rotateY(${card.rotateY}deg) rotateZ(${card.rotateZ}deg) translateZ(${card.translateZ}px)`,
-                zIndex: card.zIndex,
-                borderRadius: 16,
-                background: 'linear-gradient(160deg, #c8d0de 0%, #9aaabb 35%, #7a8fa4 70%, #606e82 100%)',
-                boxShadow: `0 20px 60px rgba(0,0,20,0.7), 0 4px 16px rgba(0,0,20,0.5), inset 0 1px 0 rgba(255,255,255,0.25)`,
-                overflow: 'hidden',
-              }}
-            >
-              {/* Top-edge highlight */}
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 100%)', borderRadius: '16px 16px 0 0' }} />
-              {/* Left-edge specular */}
-              <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '18%', background: 'linear-gradient(to right, rgba(255,255,255,0.14) 0%, transparent 100%)' }} />
-              {/* Bottom reflection */}
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, rgba(255,255,255,0.08) 0%, transparent 100%)', borderRadius: '0 0 16px 16px' }} />
-              {/* Border */}
-              <div style={{ position: 'absolute', inset: 0, borderRadius: 16, border: '1px solid rgba(255,255,255,0.3)' }} />
-            </motion.div>
-          ))}
+          {/* Card 1 — outermost, smallest, heavily rotated */}
+          <Card
+            w={130} h={290}
+            rotate={-22} tx={-18} ty={0}
+            opacity={0.42} zIndex={1} delay={0.15} initX={-100}
+            shadow="0 30px 70px rgba(0,0,20,0.85), 0 6px 20px rgba(0,0,20,0.6)"
+          />
+          {/* Card 2 — middle */}
+          <Card
+            w={155} h={330}
+            rotate={-12} tx={50} ty={-10}
+            opacity={0.68} zIndex={2} delay={0.28} initX={-80}
+            shadow="0 35px 80px rgba(0,0,20,0.8), 0 8px 24px rgba(0,0,20,0.55)"
+          />
+          {/* Card 3 — front, largest, slight inward lean */}
+          <Card
+            w={178} h={370}
+            rotate={-3} tx={130} ty={-24}
+            opacity={0.92} zIndex={3} delay={0.42} initX={-60}
+            shadow="0 40px 90px rgba(0,0,20,0.75), 0 10px 30px rgba(0,0,20,0.5), 0 0 60px rgba(20,60,180,0.25)"
+          />
+
+          {/* Floor reflection — left group */}
+          <div style={{
+            position: 'absolute',
+            bottom: -32,
+            left: 0,
+            right: 0,
+            height: 32,
+            background: 'linear-gradient(to bottom, rgba(180,200,230,0.12) 0%, transparent 100%)',
+            filter: 'blur(4px)',
+            transform: 'scaleY(-1)',
+            pointerEvents: 'none',
+          }} />
         </div>
 
         {/* ── RIGHT CARDS — mirror ── */}
@@ -171,48 +146,47 @@ export default function HeroSection() {
           className="absolute"
           style={{
             right: 0,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '26vw',
-            minWidth: 200,
-            maxWidth: 340,
-            height: '70%',
-            perspective: 1200,
+            bottom: '8%',
+            width: '30vw',
+            minWidth: 220,
+            maxWidth: 380,
+            height: '72%',
           }}
         >
-          {[
-            /* front: closest to center */
-            { widthPct: 88, heightPct: 100, rotateY: -10, rotateZ: 1, translateX: '-30%', translateY: '0%', translateZ: 0, opacity: 0.90, zIndex: 3 },
-            /* middle */
-            { widthPct: 72, heightPct: 86, rotateY: -28, rotateZ: 4, translateX: '-12%', translateY: '3%', translateZ: -80, opacity: 0.62, zIndex: 2 },
-            /* outermost */
-            { widthPct: 58, heightPct: 72, rotateY: -48, rotateZ: 8, translateX: '10%', translateY: '8%', translateZ: -180, opacity: 0.38, zIndex: 1 },
-          ].map((card, i) => (
-            <motion.div
-              key={`right-${i}`}
-              initial={{ opacity: 0, x: 80 }}
-              animate={{ opacity: card.opacity, x: 0 }}
-              transition={{ delay: 0.2 + i * 0.14, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-              style={{
-                position: 'absolute',
-                width: `${card.widthPct}%`,
-                height: `${card.heightPct}%`,
-                top: '50%',
-                right: 0,
-                transform: `translateY(-50%) translateX(${card.translateX}) translateY(${card.translateY}) perspective(1200px) rotateY(${card.rotateY}deg) rotateZ(${card.rotateZ}deg) translateZ(${card.translateZ}px)`,
-                zIndex: card.zIndex,
-                borderRadius: 16,
-                background: 'linear-gradient(160deg, #c8d0de 0%, #9aaabb 35%, #7a8fa4 70%, #606e82 100%)',
-                boxShadow: `0 20px 60px rgba(0,0,20,0.7), 0 4px 16px rgba(0,0,20,0.5), inset 0 1px 0 rgba(255,255,255,0.25)`,
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 100%)', borderRadius: '16px 16px 0 0' }} />
-              <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '18%', background: 'linear-gradient(to left, rgba(255,255,255,0.14) 0%, transparent 100%)' }} />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, rgba(255,255,255,0.08) 0%, transparent 100%)', borderRadius: '0 0 16px 16px' }} />
-              <div style={{ position: 'absolute', inset: 0, borderRadius: 16, border: '1px solid rgba(255,255,255,0.3)' }} />
-            </motion.div>
-          ))}
+          {/* Card 3 — front, largest */}
+          <Card
+            w={178} h={370}
+            rotate={3} tx={-130} ty={-24}
+            opacity={0.92} zIndex={3} delay={0.42} initX={60}
+            shadow="0 40px 90px rgba(0,0,20,0.75), 0 10px 30px rgba(0,0,20,0.5), 0 0 60px rgba(20,60,180,0.25)"
+          />
+          {/* Card 2 — middle */}
+          <Card
+            w={155} h={330}
+            rotate={12} tx={-50} ty={-10}
+            opacity={0.68} zIndex={2} delay={0.28} initX={80}
+            shadow="0 35px 80px rgba(0,0,20,0.8), 0 8px 24px rgba(0,0,20,0.55)"
+          />
+          {/* Card 1 — outermost */}
+          <Card
+            w={130} h={290}
+            rotate={22} tx={18} ty={0}
+            opacity={0.42} zIndex={1} delay={0.15} initX={100}
+            shadow="0 30px 70px rgba(0,0,20,0.85), 0 6px 20px rgba(0,0,20,0.6)"
+          />
+
+          {/* Floor reflection — right group */}
+          <div style={{
+            position: 'absolute',
+            bottom: -32,
+            left: 0,
+            right: 0,
+            height: 32,
+            background: 'linear-gradient(to bottom, rgba(180,200,230,0.12) 0%, transparent 100%)',
+            filter: 'blur(4px)',
+            transform: 'scaleY(-1)',
+            pointerEvents: 'none',
+          }} />
         </div>
 
         {/* ── CENTER CONTENT ── */}

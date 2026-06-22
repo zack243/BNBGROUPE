@@ -1,7 +1,6 @@
 import { getTranslations } from '@/lib/i18n';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
-import StatsSection from '@/components/StatsSection';
 import BusinessPortfolioSection from '@/components/BusinessPortfolioSection';
 import ProductsSection from '@/components/ProductsSection';
 import CSRPreviewSection from '@/components/CSRPreviewSection';
@@ -26,7 +25,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <StatsSection />
       <AboutSection />
       <BusinessPortfolioSection />
       <ProductsSection />

@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale } from '@/lib/i18n-context';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import LanguageSwitch from './LanguageSwitch';
 
 function FacebookIcon() {
@@ -45,11 +45,30 @@ export default function Navbar() {
   const locale = useLocale();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) {
+        setProductsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const productCategories = [
+    { label: 'Alimentaire',            href: `/${locale}/food-beverages/` },
+    { label: 'Hygiène & Santé',        href: `/${locale}/health-and-hygiene/` },
+    { label: 'Entretien de la Maison', href: `/${locale}/home-care/` },
+    { label: 'Électronique',           href: `/${locale}/electronics-home-appliances/` },
+    { label: 'Distribution',           href: `/${locale}/distribution/` },
+  ];
 
   const navItems = [
     { label: 'Accueil', href: `/${locale}/` },
     { label: 'À propos', href: `/${locale}/about-us/` },
-    { label: 'Notre portefeuille', href: `/${locale}/business-portfolio/` },
     { label: 'Focus Brands', href: `/${locale}/focus-brand/` },
     { label: 'Responsabilité Sociétale', href: `/${locale}/csr/` },
     { label: 'Carrières', href: `/${locale}/career/` },
@@ -92,37 +111,106 @@ export default function Navbar() {
 
           {/* ── COL 2: Nav — flex-1 centered ── */}
           <nav className="hidden xl:flex flex-1 items-center justify-center">
-            {navItems.map((item) => {
+            {/* Accueil + À propos */}
+            {navItems.slice(0, 2).map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href.replace(/\/$/, ''));
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative"
-                  style={{
-                    padding: '8px 16px',
-                    fontSize: 13.5,
-                    fontWeight: 500,
-                    color: isActive ? '#e41e1e' : '#1a2340',
-                    whiteSpace: 'nowrap',
-                    letterSpacing: '0.01em',
-                    transition: 'color 0.2s',
-                  }}
+                <Link key={item.href} href={item.href} className="relative"
+                  style={{ padding: '8px 16px', fontSize: 13.5, fontWeight: 500, color: isActive ? '#e41e1e' : '#1a2340', whiteSpace: 'nowrap', letterSpacing: '0.01em', transition: 'color 0.2s' }}
                   onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e'; }}
                   onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#1a2340'; }}
                 >
                   {item.label}
-                  {isActive && (
-                    <span style={{
-                      position: 'absolute',
-                      bottom: 2,
-                      left: '16px',
-                      right: '16px',
-                      height: 2,
-                      background: '#e41e1e',
-                      borderRadius: 2,
-                    }} />
-                  )}
+                  {isActive && <span style={{ position: 'absolute', bottom: 2, left: '16px', right: '16px', height: 2, background: '#e41e1e', borderRadius: 2 }} />}
+                </Link>
+              );
+            })}
+
+            {/* ── Produits dropdown ── */}
+            <div ref={productsRef} style={{ position: 'relative' }}>
+              <button
+                onClick={() => setProductsOpen(!productsOpen)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 4,
+                  padding: '8px 16px', fontSize: 13.5, fontWeight: 500,
+                  color: productCategories.some(c => pathname.startsWith(c.href.replace(/\/$/, ''))) ? '#e41e1e' : '#1a2340',
+                  whiteSpace: 'nowrap', letterSpacing: '0.01em',
+                  background: 'none', border: 'none', cursor: 'pointer', transition: 'color 0.2s',
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = '#e41e1e'; }}
+                onMouseLeave={(e) => {
+                  const active = productCategories.some(c => pathname.startsWith(c.href.replace(/\/$/, '')));
+                  (e.currentTarget as HTMLButtonElement).style.color = active ? '#e41e1e' : '#1a2340';
+                }}
+              >
+                Produits
+                <ChevronDown style={{ width: 14, height: 14, transition: 'transform 0.2s', transform: productsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+              </button>
+
+              <AnimatePresence>
+                {productsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.18 }}
+                    style={{
+                      position: 'absolute', top: 'calc(100% + 8px)', left: '50%',
+                      transform: 'translateX(-50%)',
+                      background: '#fff', borderRadius: 10,
+                      boxShadow: '0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+                      border: '1px solid #f0f0f0',
+                      minWidth: 220, zIndex: 100, overflow: 'hidden',
+                    }}
+                  >
+                    <div style={{ padding: '8px 0 4px', borderBottom: '1px solid #f5f5f5' }}>
+                      <span style={{ display: 'block', padding: '4px 20px 8px', fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', color: '#9ca3af', textTransform: 'uppercase' }}>Nos Catégories</span>
+                    </div>
+                    {productCategories.map((cat) => {
+                      const catActive = pathname.startsWith(cat.href.replace(/\/$/, ''));
+                      return (
+                        <Link
+                          key={cat.href}
+                          href={cat.href}
+                          onClick={() => setProductsOpen(false)}
+                          style={{
+                            display: 'block', padding: '10px 20px',
+                            fontSize: 13.5, fontWeight: catActive ? 600 : 400,
+                            color: catActive ? '#e41e1e' : '#1a2340',
+                            transition: 'all 0.15s', borderLeft: catActive ? '3px solid #e41e1e' : '3px solid transparent',
+                          }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLAnchorElement).style.background = '#fef2f2';
+                            (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e';
+                            (e.currentTarget as HTMLAnchorElement).style.borderLeftColor = '#e41e1e';
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+                            (e.currentTarget as HTMLAnchorElement).style.color = catActive ? '#e41e1e' : '#1a2340';
+                            (e.currentTarget as HTMLAnchorElement).style.borderLeftColor = catActive ? '#e41e1e' : 'transparent';
+                          }}
+                        >
+                          {cat.label}
+                        </Link>
+                      );
+                    })}
+                    <div style={{ height: 4 }} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Remaining nav items */}
+            {navItems.slice(2).map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href.replace(/\/$/, ''));
+              return (
+                <Link key={item.href} href={item.href} className="relative"
+                  style={{ padding: '8px 16px', fontSize: 13.5, fontWeight: 500, color: isActive ? '#e41e1e' : '#1a2340', whiteSpace: 'nowrap', letterSpacing: '0.01em', transition: 'color 0.2s' }}
+                  onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#e41e1e'; }}
+                  onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#1a2340'; }}
+                >
+                  {item.label}
+                  {isActive && <span style={{ position: 'absolute', bottom: 2, left: '16px', right: '16px', height: 2, background: '#e41e1e', borderRadius: 2 }} />}
                 </Link>
               );
             })}

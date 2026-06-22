@@ -44,18 +44,30 @@ export default function HeroSection() {
         {/* Dark scrim — preserves light beams, improves text legibility */}
         <div className="absolute inset-0" style={{ background: 'rgba(2,8,28,0.32)' }} />
 
-        {/* ── LEFT CARD GROUP ── */}
+        {/* ── LEFT CARD GROUP — Calcident · Bon Appétit · Bon Déjeuner ── */}
         <div className="hero-card-group hero-card-left">
-          <div className="hero-card card-back" />
-          <div className="hero-card card-mid" />
-          <div className="hero-card card-front" />
+          <div className="hero-card card-back">
+            <img src="/images/bnb/hero/bondejeuner.png" alt="Bon Déjeuner" className="hero-card-img" />
+          </div>
+          <div className="hero-card card-mid">
+            <img src="/images/bnb/hero/bonappetit.png" alt="Bon Appétit" className="hero-card-img" />
+          </div>
+          <div className="hero-card card-front">
+            <img src="/images/bnb/hero/calcident.png" alt="Calcident" className="hero-card-img" />
+          </div>
         </div>
 
-        {/* ── RIGHT CARD GROUP ── */}
+        {/* ── RIGHT CARD GROUP — Bom Dia · Simba · Volcan ── */}
         <div className="hero-card-group hero-card-right">
-          <div className="hero-card card-front" />
-          <div className="hero-card card-mid" />
-          <div className="hero-card card-back" />
+          <div className="hero-card card-front">
+            <img src="/images/bnb/hero/bomdia.png" alt="Bom Dia" className="hero-card-img" />
+          </div>
+          <div className="hero-card card-mid">
+            <img src="/images/bnb/hero/simba.png" alt="Simba" className="hero-card-img" />
+          </div>
+          <div className="hero-card card-back">
+            <img src="/images/bnb/hero/volcan.png" alt="Volcan" className="hero-card-img" />
+          </div>
         </div>
 
         {/* ── CENTER CONTENT ── */}

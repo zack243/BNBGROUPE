@@ -9,7 +9,7 @@ const CSR_CARDS = [
   {
     title: 'Éducation',
     description: 'Réhabilitation des écoles, fournitures scolaires, bourses d\'études pour les jeunes Africains.',
-    image: '/images/bnb/products/baby-care.jpg',
+    image: '/images/bnb/social/social1.jpg',
     icon: GraduationCap,
     accent: '#e41e1e',
     accentLight: '#fef2f2',
@@ -17,7 +17,7 @@ const CSR_CARDS = [
   {
     title: 'Santé & Bien-être',
     description: 'Campagnes de don de sang, chirurgies gratuites, soutien aux structures de santé locales.',
-    image: '/images/bnb/products/health-hygiene.jpg',
+    image: '/images/bnb/social/social2.jpg',
     icon: Heart,
     accent: '#16a34a',
     accentLight: '#f0fdf4',
@@ -25,7 +25,7 @@ const CSR_CARDS = [
   {
     title: 'Environnement',
     description: 'Initiatives de reboisement, sensibilisation écologique et développement durable.',
-    image: '/images/bnb/products/home-care.jpg',
+    image: '/images/bnb/social/social4.jpg',
     icon: Leaf,
     accent: '#0ea5e9',
     accentLight: '#f0f9ff',
@@ -33,7 +33,7 @@ const CSR_CARDS = [
   {
     title: 'Développement Communautaire',
     description: 'Distribution alimentaire, aide aux personnes vulnérables et soutien aux communautés.',
-    image: '/images/bnb/products/food-beverages.jpg',
+    image: '/images/bnb/social/social3.jpg',
     icon: Users,
     accent: '#f97316',
     accentLight: '#fff7ed',
@@ -145,7 +145,7 @@ export default function CSRPreviewSection() {
                 position: 'relative',
               }}>
                 <img
-                  src="/images/bnb/products/personal-care.jpg"
+                  src="/images/bnb/social/social3.jpg"
                   alt="Responsabilité Sociétale BNB"
                   style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
                 />

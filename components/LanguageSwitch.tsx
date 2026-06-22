@@ -44,27 +44,63 @@ export default function LanguageSwitch({ className }: LanguageSwitchProps) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isPending}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-bnb-gray-700 hover:text-bnb-blue-600 transition-colors rounded-md hover:bg-bnb-blue-50"
+        className="flex items-center gap-1.5 transition-colors"
+        style={{
+          padding: '6px 10px',
+          borderRadius: 6,
+          border: '1px solid #e5e7eb',
+          background: 'white',
+          color: '#1a2340',
+          fontSize: 13,
+          fontWeight: 600,
+          cursor: 'pointer',
+          letterSpacing: '0.04em',
+        }}
       >
-        <Globe className="w-4 h-4" />
-        <span>{currentLanguage?.label}</span>
-        <ChevronDown className={cn('w-4 h-4 transition-transform', isOpen && 'rotate-180')} />
+        <Globe className="w-3.5 h-3.5" style={{ color: '#6b7280' }} />
+        <span style={{ textTransform: 'uppercase' }}>{locale}</span>
+        <ChevronDown
+          className="w-3 h-3"
+          style={{
+            color: '#6b7280',
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 0.2s',
+          }}
+        />
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-xl border border-bnb-gray-100 overflow-hidden z-50">
+          <div
+            className="absolute right-0 z-50"
+            style={{
+              top: 'calc(100% + 6px)',
+              minWidth: 130,
+              background: 'white',
+              borderRadius: 8,
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              border: '1px solid #e5e7eb',
+              overflow: 'hidden',
+            }}
+          >
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => switchLocale(lang.code)}
-                className={cn(
-                  'w-full px-4 py-2 text-left text-sm font-medium transition-colors',
-                  locale === lang.code
-                    ? 'bg-bnb-blue-50 text-bnb-blue-600'
-                    : 'text-bnb-gray-700 hover:bg-bnb-blue-50 hover:text-bnb-blue-600'
-                )}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '9px 14px',
+                  textAlign: 'left',
+                  fontSize: 13,
+                  fontWeight: locale === lang.code ? 600 : 400,
+                  color: locale === lang.code ? '#e41e1e' : '#1a2340',
+                  background: locale === lang.code ? '#fff5f5' : 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.15s',
+                }}
               >
                 {lang.label}
               </button>

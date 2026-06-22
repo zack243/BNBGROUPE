@@ -75,21 +75,21 @@ export default function Navbar() {
           {/* Logo */}
           <Link href={`/${locale}/`} className="flex-shrink-0 flex items-center">
             <img
-              src="/images/bnb/logo/bnb-logo.png"
+              src="/images/bnb/logo/logo bnb.avif"
               alt="BNB Groupe"
-              style={{ height: 48, width: 'auto', objectFit: 'contain' }}
+              style={{ height: 44, width: 'auto', objectFit: 'contain', display: 'block' }}
             />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center gap-0">
+          <nav className="hidden xl:flex items-center">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href.replace(/\/$/, ''));
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative px-3 py-1 text-sm font-medium transition-colors"
+                  className="relative px-4 py-2 text-sm font-medium transition-colors"
                   style={{
                     color: isActive ? '#e41e1e' : '#1a2340',
                     whiteSpace: 'nowrap',
@@ -118,9 +118,10 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Language + Social */}
-          <div className="hidden xl:flex items-center gap-3">
+          <div className="hidden xl:flex items-center gap-2">
             <LanguageSwitch />
-            <div className="flex items-center gap-1 ml-2">
+            <div style={{ width: 1, height: 20, background: '#e5e7eb', margin: '0 8px' }} />
+            <div className="flex items-center gap-1">
               {socialLinks.map((s) => (
                 <a
                   key={s.label}

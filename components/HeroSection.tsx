@@ -27,162 +27,190 @@ export default function HeroSection() {
       {/* ── HERO ── */}
       <section
         className="relative w-full overflow-hidden"
-        style={{ height: 'calc(100vh - 72px)' }}
+        style={{ height: '78vh', minHeight: 480 }}
       >
-        {/* ── BACKGROUND: deep navy + layered light effects ── */}
-        <div className="absolute inset-0" style={{ background: '#050f2a' }} />
+        {/* ── BACKGROUND LAYERS ── */}
 
-        {/* Radial centre glow */}
+        {/* Base: deep navy */}
+        <div className="absolute inset-0" style={{ background: '#04102a' }} />
+
+        {/* Mid-blue radial glow behind centre */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 70% 60% at 50% 40%, rgba(10,40,120,0.85) 0%, rgba(5,15,42,0) 70%)',
+              'radial-gradient(ellipse 60% 70% at 50% 45%, rgba(14,52,140,0.9) 0%, rgba(6,18,55,0.4) 55%, transparent 80%)',
           }}
         />
 
-        {/* Top-left light streak */}
+        {/* Top-left light beam — wide fan from upper-left corner */}
         <div
           className="absolute"
           style={{
-            top: '-10%',
-            left: '-5%',
-            width: '55%',
-            height: '90%',
+            top: 0, left: 0,
+            width: '52%', height: '100%',
             background:
-              'conic-gradient(from 140deg at 0% 0%, rgba(30,80,200,0.18) 0deg, transparent 60deg)',
-            filter: 'blur(40px)',
-            transform: 'rotate(-5deg)',
+              'linear-gradient(115deg, rgba(40,100,220,0.22) 0%, rgba(20,60,160,0.12) 30%, transparent 65%)',
+            filter: 'blur(18px)',
           }}
         />
-        {/* Top-right light streak */}
+
+        {/* Top-right subtle glow */}
         <div
           className="absolute"
           style={{
-            top: '-10%',
-            right: '-5%',
-            width: '55%',
-            height: '90%',
+            top: 0, right: 0,
+            width: '48%', height: '85%',
             background:
-              'conic-gradient(from -40deg at 100% 0%, rgba(30,80,200,0.18) 0deg, transparent 60deg)',
-            filter: 'blur(40px)',
-            transform: 'rotate(5deg)',
+              'linear-gradient(245deg, rgba(40,90,200,0.16) 0%, rgba(15,50,130,0.08) 35%, transparent 65%)',
+            filter: 'blur(24px)',
           }}
         />
 
-        {/* Volumetric fog layer */}
+        {/* Bright centre spotlight — narrow vertical beam */}
         <div
-          className="absolute inset-0"
+          className="absolute"
           style={{
+            top: '-5%', left: '50%',
+            transform: 'translateX(-50%)',
+            width: '38%', height: '75%',
             background:
-              'radial-gradient(ellipse 100% 40% at 50% 100%, rgba(8,22,70,0.7) 0%, transparent 70%)',
+              'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(60,120,255,0.15) 0%, transparent 70%)',
+            filter: 'blur(8px)',
           }}
         />
 
-        {/* Floor reflection glow */}
+        {/* Floor reflection — bright streak on the ground */}
         <div
           className="absolute bottom-0 left-0 right-0"
           style={{
-            height: '35%',
+            height: '28%',
             background:
-              'linear-gradient(to top, rgba(10,30,100,0.55) 0%, transparent 100%)',
+              'linear-gradient(to top, rgba(15,40,120,0.65) 0%, rgba(10,28,90,0.3) 50%, transparent 100%)',
           }}
         />
 
-        {/* Subtle horizontal light band */}
+        {/* Horizontal ground line glow */}
         <div
           className="absolute left-0 right-0"
           style={{
-            top: '38%',
-            height: '2px',
+            bottom: '26%',
+            height: '1px',
             background:
-              'linear-gradient(to right, transparent, rgba(80,140,255,0.12) 30%, rgba(80,140,255,0.18) 50%, rgba(80,140,255,0.12) 70%, transparent)',
+              'linear-gradient(to right, transparent 0%, rgba(60,120,255,0.25) 25%, rgba(100,160,255,0.4) 50%, rgba(60,120,255,0.25) 75%, transparent 100%)',
           }}
         />
 
-        {/* ── LEFT CARDS ── */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center" style={{ gap: '10px', paddingLeft: '28px' }}>
+        {/* Fog / atmosphere at horizon */}
+        <div
+          className="absolute left-0 right-0"
+          style={{
+            bottom: '20%',
+            height: '18%',
+            background:
+              'radial-gradient(ellipse 80% 100% at 50% 100%, rgba(20,55,160,0.28) 0%, transparent 70%)',
+            filter: 'blur(12px)',
+          }}
+        />
+
+        {/* ── LEFT CARDS — overlapping fan, largest closest to center ── */}
+        <div
+          className="absolute"
+          style={{
+            left: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '26vw',
+            minWidth: 200,
+            maxWidth: 340,
+            height: '70%',
+            perspective: 1200,
+          }}
+        >
           {[
-            { width: 110, height: 260, rotate: -12, translateX: 0, translateY: 20, opacity: 0.45, zIndex: 1, scale: 0.88 },
-            { width: 120, height: 290, rotate: -6, translateX: 10, translateY: 8, opacity: 0.65, zIndex: 2, scale: 0.94 },
-            { width: 130, height: 310, rotate: -1, translateX: 18, translateY: 0, opacity: 0.85, zIndex: 3, scale: 1 },
+            /* outermost: small, heavy rotate, far back */
+            { widthPct: 58, heightPct: 72, rotateY: 48, rotateZ: -8, translateX: '-10%', translateY: '8%', translateZ: -180, opacity: 0.38, zIndex: 1 },
+            /* middle */
+            { widthPct: 72, heightPct: 86, rotateY: 28, rotateZ: -4, translateX: '12%', translateY: '3%', translateZ: -80, opacity: 0.62, zIndex: 2 },
+            /* front: largest, least rotated */
+            { widthPct: 88, heightPct: 100, rotateY: 10, rotateZ: -1, translateX: '30%', translateY: '0%', translateZ: 0, opacity: 0.90, zIndex: 3 },
           ].map((card, i) => (
             <motion.div
               key={`left-${i}`}
-              initial={{ opacity: 0, x: -60 }}
+              initial={{ opacity: 0, x: -80 }}
               animate={{ opacity: card.opacity, x: 0 }}
-              transition={{ delay: 0.3 + i * 0.12, duration: 0.8, ease: 'easeOut' }}
+              transition={{ delay: 0.2 + i * 0.14, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
               style={{
-                width: card.width,
-                height: card.height,
-                transform: `rotate(${card.rotate}deg) translateX(${card.translateX}px) translateY(${card.translateY}px) scale(${card.scale})`,
+                position: 'absolute',
+                width: `${card.widthPct}%`,
+                height: `${card.heightPct}%`,
+                top: '50%',
+                left: 0,
+                transform: `translateY(-50%) translateX(${card.translateX}) translateY(${card.translateY}) perspective(1200px) rotateY(${card.rotateY}deg) rotateZ(${card.rotateZ}deg) translateZ(${card.translateZ}px)`,
                 zIndex: card.zIndex,
-                borderRadius: 14,
-                background: 'linear-gradient(160deg, #b0b8c8 0%, #8a9ab0 40%, #6b7d94 100%)',
-                boxShadow: `0 8px 40px rgba(0,0,30,0.55), 0 2px 8px rgba(0,0,20,0.4), inset 0 1px 0 rgba(255,255,255,0.18)`,
-                position: 'relative',
+                borderRadius: 16,
+                background: 'linear-gradient(160deg, #c8d0de 0%, #9aaabb 35%, #7a8fa4 70%, #606e82 100%)',
+                boxShadow: `0 20px 60px rgba(0,0,20,0.7), 0 4px 16px rgba(0,0,20,0.5), inset 0 1px 0 rgba(255,255,255,0.25)`,
                 overflow: 'hidden',
               }}
             >
-              {/* Card shine */}
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 50%, rgba(0,0,0,0.12) 100%)',
-                borderRadius: 14,
-              }} />
-              {/* Card reflection bottom */}
-              <div style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
-                background: 'linear-gradient(to top, rgba(255,255,255,0.07), transparent)',
-                borderRadius: '0 0 14px 14px',
-              }} />
+              {/* Top-edge highlight */}
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 100%)', borderRadius: '16px 16px 0 0' }} />
+              {/* Left-edge specular */}
+              <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '18%', background: 'linear-gradient(to right, rgba(255,255,255,0.14) 0%, transparent 100%)' }} />
+              {/* Bottom reflection */}
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, rgba(255,255,255,0.08) 0%, transparent 100%)', borderRadius: '0 0 16px 16px' }} />
               {/* Border */}
-              <div style={{
-                position: 'absolute', inset: 0, borderRadius: 14,
-                border: '1px solid rgba(255,255,255,0.22)',
-              }} />
+              <div style={{ position: 'absolute', inset: 0, borderRadius: 16, border: '1px solid rgba(255,255,255,0.3)' }} />
             </motion.div>
           ))}
         </div>
 
-        {/* ── RIGHT CARDS ── */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center flex-row-reverse" style={{ gap: '10px', paddingRight: '28px' }}>
+        {/* ── RIGHT CARDS — mirror ── */}
+        <div
+          className="absolute"
+          style={{
+            right: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '26vw',
+            minWidth: 200,
+            maxWidth: 340,
+            height: '70%',
+            perspective: 1200,
+          }}
+        >
           {[
-            { width: 130, height: 310, rotate: 1, translateX: -18, translateY: 0, opacity: 0.85, zIndex: 3, scale: 1 },
-            { width: 120, height: 290, rotate: 6, translateX: -10, translateY: 8, opacity: 0.65, zIndex: 2, scale: 0.94 },
-            { width: 110, height: 260, rotate: 12, translateX: 0, translateY: 20, opacity: 0.45, zIndex: 1, scale: 0.88 },
+            /* front: closest to center */
+            { widthPct: 88, heightPct: 100, rotateY: -10, rotateZ: 1, translateX: '-30%', translateY: '0%', translateZ: 0, opacity: 0.90, zIndex: 3 },
+            /* middle */
+            { widthPct: 72, heightPct: 86, rotateY: -28, rotateZ: 4, translateX: '-12%', translateY: '3%', translateZ: -80, opacity: 0.62, zIndex: 2 },
+            /* outermost */
+            { widthPct: 58, heightPct: 72, rotateY: -48, rotateZ: 8, translateX: '10%', translateY: '8%', translateZ: -180, opacity: 0.38, zIndex: 1 },
           ].map((card, i) => (
             <motion.div
               key={`right-${i}`}
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: 80 }}
               animate={{ opacity: card.opacity, x: 0 }}
-              transition={{ delay: 0.3 + i * 0.12, duration: 0.8, ease: 'easeOut' }}
+              transition={{ delay: 0.2 + i * 0.14, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
               style={{
-                width: card.width,
-                height: card.height,
-                transform: `rotate(${card.rotate}deg) translateX(${card.translateX}px) translateY(${card.translateY}px) scale(${card.scale})`,
+                position: 'absolute',
+                width: `${card.widthPct}%`,
+                height: `${card.heightPct}%`,
+                top: '50%',
+                right: 0,
+                transform: `translateY(-50%) translateX(${card.translateX}) translateY(${card.translateY}) perspective(1200px) rotateY(${card.rotateY}deg) rotateZ(${card.rotateZ}deg) translateZ(${card.translateZ}px)`,
                 zIndex: card.zIndex,
-                borderRadius: 14,
-                background: 'linear-gradient(160deg, #b0b8c8 0%, #8a9ab0 40%, #6b7d94 100%)',
-                boxShadow: `0 8px 40px rgba(0,0,30,0.55), 0 2px 8px rgba(0,0,20,0.4), inset 0 1px 0 rgba(255,255,255,0.18)`,
-                position: 'relative',
+                borderRadius: 16,
+                background: 'linear-gradient(160deg, #c8d0de 0%, #9aaabb 35%, #7a8fa4 70%, #606e82 100%)',
+                boxShadow: `0 20px 60px rgba(0,0,20,0.7), 0 4px 16px rgba(0,0,20,0.5), inset 0 1px 0 rgba(255,255,255,0.25)`,
                 overflow: 'hidden',
               }}
             >
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 50%, rgba(0,0,0,0.12) 100%)',
-                borderRadius: 14,
-              }} />
-              <div style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
-                background: 'linear-gradient(to top, rgba(255,255,255,0.07), transparent)',
-                borderRadius: '0 0 14px 14px',
-              }} />
-              <div style={{
-                position: 'absolute', inset: 0, borderRadius: 14,
-                border: '1px solid rgba(255,255,255,0.22)',
-              }} />
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 100%)', borderRadius: '16px 16px 0 0' }} />
+              <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '18%', background: 'linear-gradient(to left, rgba(255,255,255,0.14) 0%, transparent 100%)' }} />
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, rgba(255,255,255,0.08) 0%, transparent 100%)', borderRadius: '0 0 16px 16px' }} />
+              <div style={{ position: 'absolute', inset: 0, borderRadius: 16, border: '1px solid rgba(255,255,255,0.3)' }} />
             </motion.div>
           ))}
         </div>
